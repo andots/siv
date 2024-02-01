@@ -5,6 +5,7 @@ import { createDraggable } from "@neodrag/solid";
 import { getMatches } from "@tauri-apps/api/cli";
 import { TauriEvent, listen, type Event } from "@tauri-apps/api/event";
 import { convertFileSrc } from "@tauri-apps/api/tauri";
+import { appWindow } from "@tauri-apps/api/window";
 
 import { cn } from "~/lib/utils";
 
@@ -19,7 +20,7 @@ const Viewer: Component = () => {
   onMount(() => {
     listen(TauriEvent.WINDOW_FILE_DROP, (event: Event<TauriEvent.WINDOW_FILE_DROP>) => {
       if (event.payload.length == 1) {
-        setFilePath(convertFileSrc(event.payload[0]));
+        updateFilePath(event.payload[0]);
       }
     }).catch((e) => console.log(e));
   });
@@ -29,11 +30,18 @@ const Viewer: Component = () => {
       .then((matches) => {
         const match = matches.args["file"];
         if (match != null && match.occurrences == 1 && typeof match.value === "string") {
-          setFilePath(convertFileSrc(match.value));
+          updateFilePath(match.value);
         }
       })
       .catch((e) => console.log(e));
   });
+
+  const updateFilePath = (path: string) => {
+    setFilePath(convertFileSrc(path));
+    // update window title
+    // TODO: show only filename?
+    appWindow.setTitle(`${path} - Simple Image Viewer`).catch((e) => console.log(e));
+  };
 
   const handleMouseWheel = (e: WheelEvent) => {
     // scroll up is zoom to 10%, down to -10%
