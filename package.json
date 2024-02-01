@@ -1,0 +1,39 @@
+{
+  "name": "siv",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.4.1",
+    "@astrojs/solid-js": "^4.0.1",
+    "@astrojs/tailwind": "^5.1.0",
+    "@kobalte/core": "^0.12.1",
+    "@neodrag/solid": "^2.0.3",
+    "@tauri-apps/api": "^1.5.3",
+    "astro": "^4.2.7",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "csstype": "^3.1.3",
+    "solid-js": "^1.8.12",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.5.9",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-solid": "^0.13.1",
+    "prettier": "^3.2.4"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start dev server",
+      "detail": "pnpm astro dev --host",
+      "type": "shell",
+      "command": "pnpm astro dev --host",
+      "problemMatcher": []
+    },
+    {
+      "label": "Check",
+      "detail": "pnpm astro check",
+      "type": "shell",
+      "command": "pnpm astro check",
+      "problemMatcher": []
+    },
+    {
+      "label": "Build",
+      "detail": "pnpm astro build",
+      "type": "shell",
+      "command": "pnpm astro build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Check & Build",
+      "detail": "pnpm astro check && pnpm astro build",
+      "dependsOrder": "sequence",
+      "dependsOn": ["Check", "Build"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Preview",
+      "detail": "pnpm astro preview",
+      "type": "shell",
+      "command": "pnpm astro preview --host",
+      "problemMatcher": []
+    },
+    {
+      "label": "Tauri Dev",
+      "detail": "pnpm tauri dev",
+      "type": "shell",
+      "command": "pnpm tauri dev",
+      "problemMatcher": []
+    },
+    {
+      "label": "Tauri Dev with image",
+      "detail": "pnpm tauri dev -- -- -- image_path",
+      "type": "shell",
+      "command": "pnpm tauri dev -- -- -- %cd%\\public\\Vincent_Willem_van_Gogh_113.jpg",
+      "problemMatcher": []
+    },
+    {
+      "label": "Tauri Build",
+      "detail": "pnpm tauri build",
+      "type": "shell",
+      "command": "pnpm tauri build",
+      "problemMatcher": []
+    }
+  ]
+}

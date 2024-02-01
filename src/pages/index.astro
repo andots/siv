@@ -1,0 +1,10 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Viewer from '~/components/Viewer';
+---
+
+<Layout title="siv - Simple Image Viewer">
+	<main>
+		<Viewer client:only />
+	</main>
+</Layout>
