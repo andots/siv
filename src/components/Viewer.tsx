@@ -38,6 +38,7 @@ const Viewer: Component = () => {
 
   const updateFilePath = (path: string) => {
     setFilePath(convertFileSrc(path));
+    setScale(1.0);
     // update window title
     // TODO: show only filename?
     appWindow.setTitle(`${path} - Simple Image Viewer`).catch((e) => console.log(e));
@@ -85,6 +86,7 @@ const Viewer: Component = () => {
                 transform: `scale(${scale()})`,
                 "user-select": "none",
                 "pointer-events": "none",
+                "object-fit": "contain",
               }}
               src={filePath()}
             />
