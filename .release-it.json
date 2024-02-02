@@ -1,5 +1,21 @@
 {
   "git": {
-    "commitMessage": "chore: release v${version}"
+    "commitMessage": "chore: release v${version}",
+    "tagName": "v${version}"
+  },
+  "plugins": {
+    "@release-it/bumper": {
+      "in": "package.json",
+      "out": "src-tauri/Cargo.toml"
+    },
+    "@release-it/conventional-changelog": {
+      "preset": {
+        "name": "angular"
+      },
+      "infile": "CHANGELOG.md"
+    }
+  },
+  "npm": {
+    "publish": false
   }
 }
