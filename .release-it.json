@@ -4,9 +4,13 @@
     "tagName": "v${version}"
   },
   "plugins": {
-    "@release-it/bumper": {
+    "@j-ulrich/release-it-regex-bumper": {
       "in": "package.json",
-      "out": "src-tauri/Cargo.toml"
+      "out": {
+        "file": "src-tauri/Cargo.toml",
+        "search": "version = \"([0-9.]+)\"",
+        "replace": "version = \"{{version}}\""
+      }
     },
     "@release-it/conventional-changelog": {
       "preset": {

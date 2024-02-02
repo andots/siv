@@ -28,6 +28,7 @@
     "typescript": "^5.3.3"
   },
   "devDependencies": {
+    "@j-ulrich/release-it-regex-bumper": "^5.1.0",
     "@release-it/bumper": "^6.0.1",
     "@release-it/conventional-changelog": "^8.0.1",
     "@tauri-apps/cli": "^1.5.9",
