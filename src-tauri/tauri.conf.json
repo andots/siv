@@ -6,11 +6,15 @@
     "devPath": "http://localhost:4321",
     "distDir": "../dist"
   },
-  "package": {
-    "productName": "siv",
-    "version": "0.1.0"
-  },
   "tauri": {
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "width": 800,
+        "height": 1000
+      }
+    ],
     "cli": {
       "description": "Load file",
       "args": [
@@ -106,15 +110,6 @@
     },
     "updater": {
       "active": false
-    },
-    "windows": [
-      {
-        "fullscreen": false,
-        "height": 1000,
-        "resizable": true,
-        "title": "siv",
-        "width": 800
-      }
-    ]
+    }
   }
 }

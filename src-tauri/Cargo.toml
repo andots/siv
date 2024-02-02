@@ -3,7 +3,7 @@ name = "siv"
 version = "0.1.0"
 description = "siv is a simple image viewer"
 authors = ["andots"]
-repository = ""
+repository = "https://github.com/andots/siv"
 default-run = "siv"
 edition = "2021"
 rust-version = "1.60"
@@ -16,7 +16,12 @@ tauri-build = { version = "1.5.1", features = [] }
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.5.4", features = [ "window-set-title", "protocol-all", "path-all", "cli"] }
+tauri = { version = "1.5.4", features = [
+  "window-set-title",
+  "protocol-all",
+  "path-all",
+  "cli",
+] }
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.
