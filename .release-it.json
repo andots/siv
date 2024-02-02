@@ -25,5 +25,8 @@
   },
   "hooks": {
     "after:@j-ulrich/release-it-regex-bumper:bump": "cd src-tauri && cargo check"
+  },
+  "github": {
+    "release": true
   }
 }
