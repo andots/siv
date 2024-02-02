@@ -2,6 +2,7 @@ import { createSignal, onMount, Switch, Match } from "solid-js";
 import type { Component } from "solid-js";
 
 import { createDraggable } from "@neodrag/solid";
+import { getVersion } from "@tauri-apps/api/app";
 import { getMatches } from "@tauri-apps/api/cli";
 import { TauriEvent, listen, type Event } from "@tauri-apps/api/event";
 import { convertFileSrc } from "@tauri-apps/api/tauri";
@@ -20,7 +21,7 @@ const Viewer: Component = () => {
   onMount(() => {
     listen(TauriEvent.WINDOW_FILE_DROP, (event: Event<TauriEvent.WINDOW_FILE_DROP>) => {
       if (event.payload.length == 1) {
-        updateFilePath(event.payload[0]);
+        updateFilePath(event.payload[0]).catch((e) => console.log(e));
       }
     }).catch((e) => console.log(e));
   });
@@ -30,18 +31,19 @@ const Viewer: Component = () => {
       .then((matches) => {
         const match = matches.args["file"];
         if (match != null && match.occurrences == 1 && typeof match.value === "string") {
-          updateFilePath(match.value);
+          updateFilePath(match.value).catch((e) => console.log(e));
         }
       })
       .catch((e) => console.log(e));
   });
 
-  const updateFilePath = (path: string) => {
+  const updateFilePath = async (path: string) => {
     setFilePath(convertFileSrc(path));
     setScale(1.0);
     // update window title
-    // TODO: show only filename?
-    appWindow.setTitle(`${path} - Simple Image Viewer`).catch((e) => console.log(e));
+    const version = await getVersion();
+    const title = `${path} - Simple Image Viewer (v${version})`;
+    await appWindow.setTitle(title);
   };
 
   const handleMouseWheel = (e: WheelEvent) => {

@@ -28,6 +28,11 @@
     },
     "allowlist": {
       "all": false,
+      "app": {
+        "all": true,
+        "hide": false,
+        "show": false
+      },
       "protocol": {
         "all": true,
         "asset": true,
