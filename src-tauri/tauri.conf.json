@@ -9,6 +9,7 @@
   "tauri": {
     "windows": [
       {
+        "title": "SIV - Simple Image Viewer",
         "fullscreen": false,
         "resizable": true,
         "width": 800,
