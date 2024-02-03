@@ -1,16 +1,17 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-#[cfg(debug_assertions)]
-use tauri::Manager; // for devtools
+use tauri::Manager;
+use window_shadows::set_shadow;
 
 fn main() {
     tauri::Builder::default()
-        .setup(|_app| {
+        .setup(|app| {
+            let window = app.get_window("main").unwrap();
+            set_shadow(&window, true).expect("Unsupported platform!");
             // open devtools on debug builds
             #[cfg(debug_assertions)]
             {
-                let window = _app.get_window("main").unwrap();
                 window.open_devtools();
             }
             Ok(())

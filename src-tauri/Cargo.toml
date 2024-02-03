@@ -32,6 +32,7 @@ tauri = { version = "1.5.4", features = [
   "path-all",
   "cli",
 ] }
+window-shadows = { git = "https://github.com/tauri-apps/window-shadows.git" }
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.
