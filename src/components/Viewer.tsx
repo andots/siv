@@ -2,7 +2,7 @@ import { createSignal, onMount, Switch, Match } from "solid-js";
 import type { Component } from "solid-js";
 
 import { createDraggable } from "@neodrag/solid";
-import { getVersion } from "@tauri-apps/api/app";
+import { getName, getVersion } from "@tauri-apps/api/app";
 import { getMatches } from "@tauri-apps/api/cli";
 import { TauriEvent, listen, type Event } from "@tauri-apps/api/event";
 import { basename } from "@tauri-apps/api/path";
@@ -18,9 +18,18 @@ const Viewer: Component = () => {
   const [scale, setScale] = createSignal<number>(1.0);
   const [cursor, setCursor] = createSignal<Property.Cursor>("cursor-grab");
   const [filePath, setFilePath] = createSignal<string>("");
-  const [title, setTitle] = createSignal<string>("");
+  const [title, setTitle] = createSignal<string>("siv");
   const { draggable } = createDraggable();
   const [position, setPosition] = createSignal<{ x: number; y: number }>({ x: 0, y: 0 });
+
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  onMount(async () => {
+    const name = await getName();
+    const version = await getVersion();
+    const title = `${name} - v${version}`;
+    setTitle(title);
+    await appWindow.setTitle(title);
+  });
 
   onMount(() => {
     listen(TauriEvent.WINDOW_FILE_DROP, (event: Event<TauriEvent.WINDOW_FILE_DROP>) => {
@@ -44,9 +53,8 @@ const Viewer: Component = () => {
   const updateFilePath = async (path: string) => {
     setFilePath(convertFileSrc(path));
     // update window title
-    const version = await getVersion();
     const filename = await basename(path);
-    const title = `${filename} - v${version}`;
+    const title = `${filename}`;
     setTitle(title);
     await appWindow.setTitle(title);
   };

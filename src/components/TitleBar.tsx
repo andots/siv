@@ -59,7 +59,10 @@ const TitleBar: Component<{ title: string }> = (props) => {
           <TitleBarButton icon={CodiconEmptyWindow} onClick={() => createWindow()} />
         </div>
         <div data-tauri-drag-region>
-          <p class="text-background text-xs w-[calc(100vw-200px)] text-center overflow-hidden text-ellipsis text-nowrap">
+          <p
+            data-tauri-drag-region
+            class="text-background text-xs w-[calc(100vw-200px)] text-center overflow-hidden text-ellipsis text-nowrap"
+          >
             {props.title}
           </p>
         </div>
