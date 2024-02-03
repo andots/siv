@@ -51,17 +51,14 @@ const TitleBar: Component<{ title: string }> = (props) => {
   };
 
   return (
-    <div
-      data-tauri-drag-region
-      class="z-50 h-[28px] select-none flex flex-row fixed top-0 left-0 right-0 bg-neutral-800 text-white"
-    >
-      <div class="flex justify-between items-center w-screen">
+    <div class="z-50 h-[28px] select-none flex flex-row fixed top-0 left-0 right-0 bg-neutral-800 text-white">
+      <div data-tauri-drag-region class="flex justify-between items-center w-screen">
         <div class="w-[100px]">
           <TitleBarButton icon={CodiconChevronLeft} onClick={() => prev()} />
           <TitleBarButton icon={CodiconChevronRight} onClick={() => next()} />
           <TitleBarButton icon={CodiconEmptyWindow} onClick={() => createWindow()} />
         </div>
-        <div>
+        <div data-tauri-drag-region>
           <p class="text-background text-xs w-[calc(100vw-200px)] text-center overflow-hidden text-ellipsis text-nowrap">
             {props.title}
           </p>
