@@ -1,10 +1,13 @@
-import type { Component } from "solid-js";
+import { type Component } from "solid-js";
 
 import { appWindow } from "@tauri-apps/api/window";
 import {
+  CodiconChevronLeft,
+  CodiconChevronRight,
   CodiconChromeClose,
   CodiconChromeMaximize,
   CodiconChromeMinimize,
+  CodiconEmptyWindow,
 } from "solid-iconify/codicon";
 // import { MdiWindowMaximize, MdiWindowClose, MdiWindowMinimize } from "solid-iconify/mdi";
 
@@ -22,7 +25,7 @@ const TitleBarButton: Component<Props> = (props) => {
   );
 };
 
-const TitleBar: Component = () => {
+const TitleBar: Component<{ title: string }> = (props) => {
   const minimize = () => {
     appWindow.minimize().catch((e) => console.log(e));
   };
@@ -35,14 +38,40 @@ const TitleBar: Component = () => {
     appWindow.close().catch((e) => console.log(e));
   };
 
+  const next = () => {
+    //
+  };
+
+  const prev = () => {
+    //
+  };
+
+  const createWindow = () => {
+    //
+  };
+
   return (
     <div
       data-tauri-drag-region
-      class="z-50 h-[28px] select-none flex flex-row justify-end fixed top-0 left-0 right-0 bg-neutral-800 text-white"
+      class="z-50 h-[28px] select-none flex flex-row fixed top-0 left-0 right-0 bg-neutral-800 text-white"
     >
-      <TitleBarButton icon={CodiconChromeMinimize} onClick={() => minimize()} />
-      <TitleBarButton icon={CodiconChromeMaximize} onClick={() => toggleMaximize()} />
-      <TitleBarButton icon={CodiconChromeClose} onClick={() => close()} />
+      <div class="flex justify-between items-center w-screen">
+        <div class="w-[100px]">
+          <TitleBarButton icon={CodiconChevronLeft} onClick={() => prev()} />
+          <TitleBarButton icon={CodiconChevronRight} onClick={() => next()} />
+          <TitleBarButton icon={CodiconEmptyWindow} onClick={() => createWindow()} />
+        </div>
+        <div>
+          <p class="text-background text-xs w-[calc(100vw-200px)] text-center overflow-hidden text-ellipsis text-nowrap">
+            {props.title}
+          </p>
+        </div>
+        <div class="w-[100px]">
+          <TitleBarButton icon={CodiconChromeMinimize} onClick={() => minimize()} />
+          <TitleBarButton icon={CodiconChromeMaximize} onClick={() => toggleMaximize()} />
+          <TitleBarButton icon={CodiconChromeClose} onClick={() => close()} />
+        </div>
+      </div>
     </div>
   );
 };

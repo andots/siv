@@ -5,6 +5,7 @@ import { createDraggable } from "@neodrag/solid";
 import { getVersion } from "@tauri-apps/api/app";
 import { getMatches } from "@tauri-apps/api/cli";
 import { TauriEvent, listen, type Event } from "@tauri-apps/api/event";
+import { basename } from "@tauri-apps/api/path";
 import { convertFileSrc } from "@tauri-apps/api/tauri";
 import { appWindow } from "@tauri-apps/api/window";
 
@@ -17,6 +18,7 @@ const Viewer: Component = () => {
   const [scale, setScale] = createSignal<number>(1.0);
   const [cursor, setCursor] = createSignal<Property.Cursor>("cursor-grab");
   const [filePath, setFilePath] = createSignal<string>("");
+  const [title, setTitle] = createSignal<string>("");
   const { draggable } = createDraggable();
   const [position, setPosition] = createSignal<{ x: number; y: number }>({ x: 0, y: 0 });
 
@@ -43,7 +45,9 @@ const Viewer: Component = () => {
     setFilePath(convertFileSrc(path));
     // update window title
     const version = await getVersion();
-    const title = `${path} - Simple Image Viewer (v${version})`;
+    const filename = await basename(path);
+    const title = `${filename} - v${version}`;
+    setTitle(title);
     await appWindow.setTitle(title);
   };
 
@@ -75,7 +79,7 @@ const Viewer: Component = () => {
 
   return (
     <div class="overflow-hidden flex flex-col">
-      <TitleBar />
+      <TitleBar title={title()} />
       <div class="flex h-screen w-screen pt-[28px] bg-black">
         <Switch>
           <Match when={filePath() !== ""}>
