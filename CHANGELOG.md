@@ -1,5 +1,12 @@
 # Changelog
 
+# [0.3.0](https://github.com/andots/siv/compare/v0.2.1...v0.3.0) (2024-02-03)
+
+
+### Features
+
+* custom titlebar and window shadow ([29a3816](https://github.com/andots/siv/commit/29a38162671896e45e704920d368593cea7661ac))
+
 ## [0.2.1](https://github.com/andots/siv/compare/v0.2.0...v0.2.1) (2024-02-03)
 
 ### Bug Fixes
