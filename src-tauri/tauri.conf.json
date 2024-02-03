@@ -9,11 +9,11 @@
   "tauri": {
     "windows": [
       {
-        "title": "SIV - Simple Image Viewer",
         "fullscreen": false,
         "resizable": true,
         "width": 800,
-        "height": 1000
+        "height": 1000,
+        "decorations": false
       }
     ],
     "cli": {
@@ -44,11 +44,16 @@
       "window": {
         "all": false,
         "center": false,
-        "close": false,
-        "create": false,
-        "hide": false,
-        "maximize": false,
-        "minimize": false,
+        "close": true,
+        "create": true,
+        "hide": true,
+        "maximize": true,
+        "minimize": true,
+        "show": true,
+        "startDragging": true,
+        "unmaximize": true,
+        "unminimize": true,
+        "setTitle": true,
         "print": false,
         "requestUserAttention": false,
         "setAlwaysOnTop": false,
@@ -70,12 +75,7 @@
         "setPosition": false,
         "setResizable": false,
         "setSize": false,
-        "setSkipTaskbar": false,
-        "setTitle": true,
-        "show": false,
-        "startDragging": false,
-        "unmaximize": false,
-        "unminimize": false
+        "setSkipTaskbar": false
       }
     },
     "bundle": {
