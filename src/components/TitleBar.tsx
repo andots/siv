@@ -1,7 +1,12 @@
 import type { Component } from "solid-js";
 
 import { appWindow } from "@tauri-apps/api/window";
-import { MdiWindowMaximize, MdiWindowClose, MdiWindowMinimize } from "solid-iconify/mdi";
+import {
+  CodiconChromeClose,
+  CodiconChromeMaximize,
+  CodiconChromeMinimize,
+} from "solid-iconify/codicon";
+// import { MdiWindowMaximize, MdiWindowClose, MdiWindowMinimize } from "solid-iconify/mdi";
 
 import { Button } from "~/components/ui/button";
 
@@ -35,9 +40,9 @@ const TitleBar: Component = () => {
       data-tauri-drag-region
       class="z-50 h-[28px] select-none flex flex-row justify-end fixed top-0 left-0 right-0 bg-neutral-800 text-white"
     >
-      <TitleBarButton icon={MdiWindowMinimize} onClick={() => minimize()} />
-      <TitleBarButton icon={MdiWindowMaximize} onClick={() => toggleMaximize()} />
-      <TitleBarButton icon={MdiWindowClose} onClick={() => close()} />
+      <TitleBarButton icon={CodiconChromeMinimize} onClick={() => minimize()} />
+      <TitleBarButton icon={CodiconChromeMaximize} onClick={() => toggleMaximize()} />
+      <TitleBarButton icon={CodiconChromeClose} onClick={() => close()} />
     </div>
   );
 };
