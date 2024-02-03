@@ -17,6 +17,7 @@ const Viewer: Component = () => {
   const [cursor, setCursor] = createSignal<Property.Cursor>("cursor-grab");
   const [filePath, setFilePath] = createSignal<string>("");
   const { draggable } = createDraggable();
+  const [position, setPosition] = createSignal<{ x: number; y: number }>({ x: 0, y: 0 });
 
   onMount(() => {
     listen(TauriEvent.WINDOW_FILE_DROP, (event: Event<TauriEvent.WINDOW_FILE_DROP>) => {
@@ -39,7 +40,6 @@ const Viewer: Component = () => {
 
   const updateFilePath = async (path: string) => {
     setFilePath(convertFileSrc(path));
-    setScale(1.0);
     // update window title
     const version = await getVersion();
     const title = `${path} - Simple Image Viewer (v${version})`;
@@ -66,6 +66,9 @@ Container size: ${container.clientWidth} x ${container.clientHeight} pixels
 `;
       console.log(text);
       image.style.height = `${container.clientHeight}px`;
+      // reset scale and position
+      setScale(1.0);
+      setPosition({ x: 0, y: 0 });
     }
   };
 
@@ -101,7 +104,13 @@ Container size: ${container.clientWidth} x ${container.clientHeight} pixels
           onMouseDown={() => setCursor("cursor-grabbing")}
           onMouseUp={() => setCursor("cursor-grab")}
         >
-          <div use:draggable={{}}>
+          <div
+            use:draggable={{
+              axis: "both",
+              position: position(),
+              onDrag: ({ offsetX, offsetY }) => setPosition({ x: offsetX, y: offsetY }),
+            }}
+          >
             <img
               ref={image}
               onLoad={() => onLoadImage()}
