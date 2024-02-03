@@ -1,12 +1,8 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import Viewer from '~/components/Viewer';
-import TitleBar from '~/components/TitleBar';
 ---
 
 <Layout title="siv - Simple Image Viewer">
-	<main>
-		<TitleBar client:only />
-		<Viewer client:only />
-	</main>
+	<Viewer client:only />
 </Layout>

@@ -11,7 +11,7 @@ type Props = { icon: IconTypes; onClick: () => void };
 
 const TitleBarButton: Component<Props> = (props) => {
   return (
-    <Button variant="rect" class="h-7 w-7" onClick={props.onClick}>
+    <Button variant="rect" class="h-[28px] w-[28px]" onClick={props.onClick}>
       <props.icon />
     </Button>
   );
@@ -33,7 +33,7 @@ const TitleBar: Component = () => {
   return (
     <div
       data-tauri-drag-region
-      class="h-7 select-none flex justify-end fixed top-0 left-0 right-0 bg-neutral-800 text-white"
+      class="z-50 h-[28px] select-none flex flex-row justify-end fixed top-0 left-0 right-0 bg-neutral-800 text-white"
     >
       <TitleBarButton icon={MdiWindowMinimize} onClick={() => minimize()} />
       <TitleBarButton icon={MdiWindowMaximize} onClick={() => maximize()} />
