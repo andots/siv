@@ -59,12 +59,12 @@ const Viewer: Component = () => {
 
   const onLoadImage = () => {
     if (container && image) {
-      const text = `
-Natural size: ${image.naturalWidth} x ${image.naturalHeight} pixels
-Displayed size: ${image.width} x ${image.height} pixels
-Container size: ${container.clientWidth} x ${container.clientHeight} pixels
-`;
-      console.log(text);
+      //       const text = `
+      // Natural size: ${image.naturalWidth} x ${image.naturalHeight} pixels
+      // Displayed size: ${image.width} x ${image.height} pixels
+      // Container size: ${container.clientWidth} x ${container.clientHeight} pixels
+      // `;
+      //       console.log(text);
       image.style.height = `${container.clientHeight}px`;
       // reset scale and position
       setScale(1.0);
