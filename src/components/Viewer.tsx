@@ -54,6 +54,21 @@ const Viewer: Component = () => {
     setScale(newScale);
   };
 
+  let container: HTMLDivElement | undefined;
+  let image: HTMLImageElement | undefined;
+
+  const onLoadImage = () => {
+    if (container && image) {
+      const text = `
+Natural size: ${image.naturalWidth} x ${image.naturalHeight} pixels
+Displayed size: ${image.width} x ${image.height} pixels
+Container size: ${container.clientWidth} x ${container.clientHeight} pixels
+`;
+      console.log(text);
+      image.style.height = `${container.clientHeight}px`;
+    }
+  };
+
   return (
     <Switch>
       <Match when={filePath() === ""}>
@@ -77,13 +92,19 @@ const Viewer: Component = () => {
       </Match>
       <Match when={filePath() !== ""}>
         <div
-          class={cn("flex h-screen justify-center items-center overflow-hidden bg-black", cursor())}
+          ref={container}
+          class={cn(
+            "flex h-screen w-screen justify-center items-center overflow-hidden bg-black",
+            cursor()
+          )}
           onWheel={(e) => handleMouseWheel(e)}
           onMouseDown={() => setCursor("cursor-grabbing")}
           onMouseUp={() => setCursor("cursor-grab")}
         >
           <div use:draggable={{}}>
             <img
+              ref={image}
+              onLoad={() => onLoadImage()}
               style={{
                 transform: `scale(${scale()})`,
                 "user-select": "none",
