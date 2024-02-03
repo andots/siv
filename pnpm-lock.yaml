@@ -35,9 +35,9 @@ dependencies:
   csstype:
     specifier: ^3.1.3
     version: 3.1.3
-  solid-heroicons:
-    specifier: ^3.2.4
-    version: 3.2.4(solid-js@1.8.12)
+  solid-iconify:
+    specifier: ^0.0.4
+    version: 0.0.4(solid-js@1.8.12)
   solid-js:
     specifier: ^1.8.12
     version: 1.8.12
@@ -6405,10 +6405,10 @@ packages:
       smart-buffer: 4.2.0
     dev: true
 
-  /solid-heroicons@3.2.4(solid-js@1.8.12):
-    resolution: {integrity: sha512-u6BMdFLvkJnvUGYzdFcWp1wvJ4hb9Y1zd3AbZ9D3bUmmiy9jBzNZX+RcqBCI2EKRvdQwAb1UB9bkESfqfhayDg==}
+  /solid-iconify@0.0.4(solid-js@1.8.12):
+    resolution: {integrity: sha512-3bQt93g2Gfp5qefE5tBtUV1ap7o3p87EEaBRiqXbuFAUEc+JWiYMK92H7kr4JOemRm4Mop/78JAHIfH2PSyLpQ==}
     peerDependencies:
-      solid-js: '>= ^1.2.5'
+      solid-js: ^1.6.0
     dependencies:
       solid-js: 1.8.12
     dev: false
