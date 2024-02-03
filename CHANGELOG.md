@@ -1,5 +1,19 @@
 # Changelog
 
+# [0.4.0](https://github.com/andots/siv/compare/v0.3.0...v0.4.0) (2024-02-03)
+
+
+### Bug Fixes
+
+* add data-tauri-drag-region correctly ([6a37254](https://github.com/andots/siv/commit/6a37254944b05568bb7aefc693f6a957fc457b9f))
+* set default title as app name and version onMount ([b07f72f](https://github.com/andots/siv/commit/b07f72f1ab79107b65074aebc22352695c043c93))
+* use appWindow.toggleMaximize() ([c2e734a](https://github.com/andots/siv/commit/c2e734a0efc414b01614c524f0ae5b301be77797))
+
+
+### Features
+
+* show filename on titlebar ([ba18065](https://github.com/andots/siv/commit/ba1806581d7b887d797d68a1a3ff304a5ce050af))
+
 # [0.3.0](https://github.com/andots/siv/compare/v0.2.1...v0.3.0) (2024-02-03)
 
 
