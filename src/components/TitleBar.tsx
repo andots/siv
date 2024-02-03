@@ -22,8 +22,8 @@ const TitleBar: Component = () => {
     appWindow.minimize().catch((e) => console.log(e));
   };
 
-  const maximize = () => {
-    appWindow.maximize().catch((e) => console.log(e));
+  const toggleMaximize = () => {
+    appWindow.toggleMaximize().catch((e) => console.log(e));
   };
 
   const close = () => {
@@ -36,7 +36,7 @@ const TitleBar: Component = () => {
       class="z-50 h-[28px] select-none flex flex-row justify-end fixed top-0 left-0 right-0 bg-neutral-800 text-white"
     >
       <TitleBarButton icon={MdiWindowMinimize} onClick={() => minimize()} />
-      <TitleBarButton icon={MdiWindowMaximize} onClick={() => maximize()} />
+      <TitleBarButton icon={MdiWindowMaximize} onClick={() => toggleMaximize()} />
       <TitleBarButton icon={MdiWindowClose} onClick={() => close()} />
     </div>
   );
