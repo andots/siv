@@ -7,7 +7,7 @@ import { appWindow } from "@tauri-apps/api/window";
 
 import TitleBar from "~/components/TitleBar";
 import Viewer from "~/components/Viewer";
-import { getDefaultAppTitle, getImagesInDirectory } from "~/lib/utils";
+import { getDefaultAppTitle, getImagesInDirectory, isNotEmpty } from "~/lib/utils";
 import { useDir, useFileName, useFilePath, useFiles, useTitle } from "~/store";
 
 const App: Component = () => {
@@ -47,15 +47,17 @@ const App: Component = () => {
 
   createEffect(
     on(dir, () => {
-      getImagesInDirectory(filePath())
-        .then((files) => setFiles(files))
-        .catch((e) => console.log(e));
+      if (isNotEmpty(filePath())) {
+        getImagesInDirectory(filePath())
+          .then((files) => setFiles(files))
+          .catch((e) => console.log(e));
+      }
     })
   );
 
   createEffect(
     on(filePath, async () => {
-      if (filePath() !== "") {
+      if (isNotEmpty(filePath())) {
         const filename = await basename(filePath());
         const dir = await dirname(filePath());
         const title = `${filename}`;

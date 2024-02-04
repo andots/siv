@@ -45,3 +45,7 @@ export const getImagesInDirectory = async (filePath: string) => {
 export const joinOsPaths = (paths: string[]) => {
   return paths.join(sep);
 };
+
+export const isNotEmpty = (str: string | undefined | null) => {
+  return str != null && str !== "";
+};
