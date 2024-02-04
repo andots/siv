@@ -1,4 +1,4 @@
-import { type Component } from "solid-js";
+import { createSignal, type Component } from "solid-js";
 
 import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
 import {
@@ -7,6 +7,7 @@ import {
   CodiconChromeClose,
   CodiconChromeMaximize,
   CodiconChromeMinimize,
+  CodiconChromeRestore,
   CodiconEmptyWindow,
 } from "solid-iconify/codicon";
 // import { MdiWindowMaximize, MdiWindowClose, MdiWindowMinimize } from "solid-iconify/mdi";
@@ -38,12 +39,14 @@ const TitleBar: Component = () => {
   const { dir } = useDir();
   const { fileName } = useFileName();
   const { setFilePath } = useFilePath();
+  const [maximized, setMaximized] = createSignal<boolean>(false);
 
   const minimize = () => {
     appWindow.minimize().catch((e) => console.log(e));
   };
 
   const toggleMaximize = () => {
+    setMaximized(!maximized());
     appWindow.toggleMaximize().catch((e) => console.log(e));
   };
 
@@ -127,7 +130,10 @@ const TitleBar: Component = () => {
         </div>
         <div class="w-[100px] flex justify-end">
           <TitleBarButton icon={CodiconChromeMinimize} onClick={() => minimize()} />
-          <TitleBarButton icon={CodiconChromeMaximize} onClick={() => toggleMaximize()} />
+          <TitleBarButton
+            icon={maximized() ? CodiconChromeRestore : CodiconChromeMaximize}
+            onClick={() => toggleMaximize()}
+          />
           <TitleBarButton icon={CodiconChromeClose} onClick={() => close()} />
         </div>
       </div>
