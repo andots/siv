@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2](https://github.com/andots/siv/compare/v0.5.1...v0.5.2) (2024-02-04)
+
+
+### Bug Fixes
+
+* change icon according to maximized state ([13ea770](https://github.com/andots/siv/commit/13ea77002d469bd6f7e1b5ba356efd5127428485))
+
 ## [0.5.1](https://github.com/andots/siv/compare/v0.5.0...v0.5.1) (2024-02-04)
 
 

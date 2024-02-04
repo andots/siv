@@ -1,6 +1,6 @@
 [package]
 name = "siv"
-version = "0.5.1"
+version = "0.5.2"
 description = "SIV is a Simple Image Viewer"
 authors = ["andots"]
 repository = "https://github.com/andots/siv"
