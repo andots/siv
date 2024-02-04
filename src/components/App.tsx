@@ -1,7 +1,7 @@
 import { createEffect, on, onMount, type Component } from "solid-js";
 
 import { getMatches } from "@tauri-apps/api/cli";
-import { TauriEvent, listen, type Event } from "@tauri-apps/api/event";
+import { TauriEvent, type Event } from "@tauri-apps/api/event";
 import { basename, dirname } from "@tauri-apps/api/path";
 import { convertFileSrc } from "@tauri-apps/api/tauri";
 import { appWindow } from "@tauri-apps/api/window";
@@ -22,19 +22,21 @@ const App: Component = () => {
     })
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  onMount(async () => {
-    const title = await getDefaultAppTitle();
-    setTitle(title);
-    await appWindow.setTitle(title);
+  onMount(() => {
+    getDefaultAppTitle()
+      .then((title) => setTitle(title))
+      .then((title) => appWindow.setTitle(title))
+      .catch((e) => console.log(e));
   });
 
   onMount(() => {
-    listen(TauriEvent.WINDOW_FILE_DROP, (event: Event<TauriEvent.WINDOW_FILE_DROP>) => {
-      if (event.payload.length == 1) {
-        updateFilePath(event.payload[0]).catch((e) => console.log(e));
-      }
-    }).catch((e) => console.log(e));
+    appWindow
+      .listen(TauriEvent.WINDOW_FILE_DROP, (event: Event<TauriEvent.WINDOW_FILE_DROP>) => {
+        if (event.payload.length == 1) {
+          updateFilePath(event.payload[0]).catch((e) => console.log(e));
+        }
+      })
+      .catch((e) => console.log(e));
   });
 
   onMount(() => {
