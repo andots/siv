@@ -1,5 +1,18 @@
 # Changelog
 
+# [0.5.0](https://github.com/andots/siv/compare/v0.4.0...v0.5.0) (2024-02-04)
+
+
+### Bug Fixes
+
+* buttons on titlebar must be on right with no space ([61aa4e1](https://github.com/andots/siv/commit/61aa4e10bb0a69b39b110ba608250b1164c39ea7))
+* return sorted images array by ASC ([2f40cb3](https://github.com/andots/siv/commit/2f40cb3659c8d4e4933e1953fba83eb7e53cc883))
+
+
+### Features
+
+* file traversing prev and next ([10599d9](https://github.com/andots/siv/commit/10599d93c1e867dfa3284d64ca8bb9e9115fcd0c))
+
 # [0.4.0](https://github.com/andots/siv/compare/v0.3.0...v0.4.0) (2024-02-03)
 
 
