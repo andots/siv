@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.1](https://github.com/andots/siv/compare/v0.5.0...v0.5.1) (2024-02-04)
+
+
+### Bug Fixes
+
+* make 4px margin for data-tauri-drag-region ([67fde7f](https://github.com/andots/siv/commit/67fde7f8c9c18d03c7c5d75c3d14606b63c5df28))
+* make smaller titlebar title region ([75a533b](https://github.com/andots/siv/commit/75a533be93b8d625df071a43b8c8e2fc34ade2ba))
+
 # [0.5.0](https://github.com/andots/siv/compare/v0.4.0...v0.5.0) (2024-02-04)
 
 
