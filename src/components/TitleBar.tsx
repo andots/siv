@@ -10,10 +10,10 @@ import {
   CodiconChromeRestore,
   CodiconEmptyWindow,
 } from "solid-iconify/codicon";
-// import { MdiWindowMaximize, MdiWindowClose, MdiWindowMinimize } from "solid-iconify/mdi";
 
 import { Button } from "~/components/ui/button";
 import { TITLEBAR_HEIGHT, TITLEBAR_HEIGHT_PX } from "~/constants";
+import { invokeApplySetShadow } from "~/invokes";
 import { joinOsPaths } from "~/lib/utils";
 import { useDir, useFileName, useFilePath, useFiles, useTitle } from "~/store";
 
@@ -95,7 +95,7 @@ const TitleBar: Component = () => {
     });
     webview
       .once("tauri://created", (e) => {
-        console.log(e);
+        invokeApplySetShadow(e.windowLabel).catch((e) => console.log(e));
       })
       .catch((e) => console.log(e));
     webview
