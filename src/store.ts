@@ -15,6 +15,11 @@ export const useFilePath = () => {
   return { filePath, setFilePath };
 };
 
+const [fileName, setFileName] = createSignal<string>("");
+export const useFileName = () => {
+  return { fileName, setFileName };
+};
+
 const [files, setFiles] = createSignal<string[]>([]);
 export const useFiles = () => {
   return { files, setFiles };

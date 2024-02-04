@@ -8,13 +8,14 @@ import { appWindow } from "@tauri-apps/api/window";
 import TitleBar from "~/components/TitleBar";
 import Viewer from "~/components/Viewer";
 import { getDefaultAppTitle, getImagesInDirectory } from "~/lib/utils";
-import { useDir, useFilePath, useFiles, useTitle } from "~/store";
+import { useDir, useFileName, useFilePath, useFiles, useTitle } from "~/store";
 
 const App: Component = () => {
   const { dir, setDir } = useDir();
   const { setTitle } = useTitle();
   const { setFiles } = useFiles();
   const { filePath, setFilePath } = useFilePath();
+  const { setFileName } = useFileName();
 
   onMount(() => {
     getDefaultAppTitle()
@@ -54,12 +55,15 @@ const App: Component = () => {
 
   createEffect(
     on(filePath, async () => {
-      const filename = await basename(filePath());
-      const dir = await dirname(filePath());
-      const title = `${filename}`;
-      setTitle(title);
-      setDir(dir);
-      await appWindow.setTitle(title);
+      if (filePath() !== "") {
+        const filename = await basename(filePath());
+        const dir = await dirname(filePath());
+        const title = `${filename}`;
+        setFileName(filename);
+        setTitle(title);
+        setDir(dir);
+        await appWindow.setTitle(title);
+      }
     })
   );
 

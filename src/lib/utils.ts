@@ -1,6 +1,6 @@
 import { getName, getVersion } from "@tauri-apps/api/app";
 import { readDir } from "@tauri-apps/api/fs";
-import { dirname, extname } from "@tauri-apps/api/path";
+import { dirname, extname, sep } from "@tauri-apps/api/path";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -41,4 +41,8 @@ export const getImagesInDirectory = async (filePath: string) => {
   }
   // order given filePath as head
   return images;
+};
+
+export const joinOsPaths = (paths: string[]) => {
+  return paths.join(sep);
 };
