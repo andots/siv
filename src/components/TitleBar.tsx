@@ -120,7 +120,7 @@ const TitleBar: Component = () => {
         >
           <p
             data-tauri-drag-region
-            class="text-primary-foreground text-xs w-[calc(100vw-200px)] text-center overflow-hidden text-ellipsis text-nowrap"
+            class="text-primary-foreground text-xs w-[calc(100vw-240px)] text-center overflow-hidden text-ellipsis text-nowrap"
           >
             {title()}
           </p>
