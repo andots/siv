@@ -1,5 +1,17 @@
 # Changelog
 
+# [0.6.0](https://github.com/andots/siv/compare/v0.5.2...v0.6.0) (2024-02-04)
+
+
+### Bug Fixes
+
+* empty check for filePath in createEffect ([fd70466](https://github.com/andots/siv/commit/fd704669029eca225a4edc57aa749563d6389592))
+
+
+### Features
+
+* apply set_shadow after creating new window ([85e26ff](https://github.com/andots/siv/commit/85e26ffef6a88d0b76c0767be5d7f7e42132453f))
+
 ## [0.5.2](https://github.com/andots/siv/compare/v0.5.1...v0.5.2) (2024-02-04)
 
 
