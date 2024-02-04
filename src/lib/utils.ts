@@ -39,8 +39,7 @@ export const getImagesInDirectory = async (filePath: string) => {
       images.push(entry.name);
     }
   }
-  // order given filePath as head
-  return images;
+  return images.sort(); // return sorted array by ASC
 };
 
 export const joinOsPaths = (paths: string[]) => {
