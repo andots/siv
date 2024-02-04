@@ -11,14 +11,15 @@ import { appWindow } from "@tauri-apps/api/window";
 
 import TitleBar from "~/components/TitleBar";
 import { cn } from "~/lib/utils";
+import { useTitle } from "~/store";
 
 import type { Property } from "csstype";
 
 const Viewer: Component = () => {
+  const { setTitle } = useTitle();
   const [scale, setScale] = createSignal<number>(1.0);
   const [cursor, setCursor] = createSignal<Property.Cursor>("cursor-grab");
   const [filePath, setFilePath] = createSignal<string>("");
-  const [title, setTitle] = createSignal<string>("siv");
   const { draggable } = createDraggable();
   const [position, setPosition] = createSignal<{ x: number; y: number }>({ x: 0, y: 0 });
 
@@ -87,7 +88,7 @@ const Viewer: Component = () => {
 
   return (
     <div class="overflow-hidden flex flex-col">
-      <TitleBar title={title()} />
+      <TitleBar />
       <div class="flex h-screen w-screen pt-[28px] bg-black">
         <Switch>
           <Match when={filePath() !== ""}>

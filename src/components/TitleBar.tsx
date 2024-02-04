@@ -12,6 +12,7 @@ import {
 // import { MdiWindowMaximize, MdiWindowClose, MdiWindowMinimize } from "solid-iconify/mdi";
 
 import { Button } from "~/components/ui/button";
+import { useTitle } from "~/store";
 
 import type { IconTypes } from "solid-iconify";
 
@@ -25,7 +26,9 @@ const TitleBarButton: Component<Props> = (props) => {
   );
 };
 
-const TitleBar: Component<{ title: string }> = (props) => {
+const TitleBar: Component = () => {
+  const { title } = useTitle();
+
   const minimize = () => {
     appWindow.minimize().catch((e) => console.log(e));
   };
@@ -82,7 +85,7 @@ const TitleBar: Component<{ title: string }> = (props) => {
             data-tauri-drag-region
             class="text-background text-xs w-[calc(100vw-200px)] text-center overflow-hidden text-ellipsis text-nowrap"
           >
-            {props.title}
+            {title()}
           </p>
         </div>
         <div class="w-[100px] flex justify-end">
