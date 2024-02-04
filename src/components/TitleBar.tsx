@@ -12,6 +12,7 @@ import {
 // import { MdiWindowMaximize, MdiWindowClose, MdiWindowMinimize } from "solid-iconify/mdi";
 
 import { Button } from "~/components/ui/button";
+import { TITLEBAR_HEIGHT, TITLEBAR_HEIGHT_PX } from "~/constants";
 import { joinOsPaths } from "~/lib/utils";
 import { useDir, useFileName, useFilePath, useFiles, useTitle } from "~/store";
 
@@ -21,7 +22,11 @@ type Props = { icon: IconTypes; onClick: () => void };
 
 const TitleBarButton: Component<Props> = (props) => {
   return (
-    <Button variant="rect" class="h-[28px] w-[28px]" onClick={props.onClick}>
+    <Button
+      variant="rect"
+      style={{ height: TITLEBAR_HEIGHT_PX, width: TITLEBAR_HEIGHT_PX }}
+      onClick={props.onClick}
+    >
       <props.icon />
     </Button>
   );
@@ -98,14 +103,21 @@ const TitleBar: Component = () => {
   };
 
   return (
-    <div class="z-50 h-[28px] select-none flex flex-row fixed top-0 left-0 right-0 bg-neutral-800 text-white">
-      <div data-tauri-drag-region class="flex justify-between items-center w-screen">
+    <div
+      class="z-50 w-screen select-none fixed top-0 left-0 right-0 bg-secondary-foreground text-background"
+      style={{ height: TITLEBAR_HEIGHT_PX }}
+    >
+      <div class="flex justify-between items-center">
         <div class="w-[100px]">
           <TitleBarButton icon={CodiconChevronLeft} onClick={() => prev()} />
           <TitleBarButton icon={CodiconChevronRight} onClick={() => next()} />
           <TitleBarButton icon={CodiconEmptyWindow} onClick={() => createWindow()} />
         </div>
-        <div data-tauri-drag-region>
+        <div
+          data-tauri-drag-region
+          style={{ height: `${TITLEBAR_HEIGHT - 4}px` }}
+          class="relative top-[4px]"
+        >
           <p
             data-tauri-drag-region
             class="text-background text-xs w-[calc(100vw-200px)] text-center overflow-hidden text-ellipsis text-nowrap"
