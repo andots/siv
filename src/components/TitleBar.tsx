@@ -23,7 +23,7 @@ type Props = { icon: IconTypes; onClick: () => void };
 const TitleBarButton: Component<Props> = (props) => {
   return (
     <Button
-      variant="rect"
+      variant="titlebar"
       style={{ height: TITLEBAR_HEIGHT_PX, width: TITLEBAR_HEIGHT_PX }}
       onClick={props.onClick}
     >
@@ -104,7 +104,7 @@ const TitleBar: Component = () => {
 
   return (
     <div
-      class="z-50 w-screen select-none fixed top-0 left-0 right-0 bg-secondary-foreground text-background"
+      class="z-50 w-screen select-none fixed top-0 left-0 right-0 bg-secondary-foreground text-primary-foreground"
       style={{ height: TITLEBAR_HEIGHT_PX }}
     >
       <div class="flex justify-between items-center">
@@ -120,7 +120,7 @@ const TitleBar: Component = () => {
         >
           <p
             data-tauri-drag-region
-            class="text-background text-xs w-[calc(100vw-200px)] text-center overflow-hidden text-ellipsis text-nowrap"
+            class="text-primary-foreground text-xs w-[calc(100vw-200px)] text-center overflow-hidden text-ellipsis text-nowrap"
           >
             {title()}
           </p>
