@@ -85,7 +85,7 @@ const TitleBar: Component<{ title: string }> = (props) => {
             {props.title}
           </p>
         </div>
-        <div class="w-[100px]">
+        <div class="w-[100px] flex justify-end">
           <TitleBarButton icon={CodiconChromeMinimize} onClick={() => minimize()} />
           <TitleBarButton icon={CodiconChromeMaximize} onClick={() => toggleMaximize()} />
           <TitleBarButton icon={CodiconChromeClose} onClick={() => close()} />
