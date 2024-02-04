@@ -2,34 +2,25 @@ import { createSignal, onMount, Switch, Match } from "solid-js";
 import type { Component } from "solid-js";
 
 import { createDraggable } from "@neodrag/solid";
-import { getName, getVersion } from "@tauri-apps/api/app";
 import { getMatches } from "@tauri-apps/api/cli";
 import { TauriEvent, listen, type Event } from "@tauri-apps/api/event";
-import { basename } from "@tauri-apps/api/path";
+import { basename, dirname } from "@tauri-apps/api/path";
 import { convertFileSrc } from "@tauri-apps/api/tauri";
 import { appWindow } from "@tauri-apps/api/window";
 
 import { cn } from "~/lib/utils";
-import { useTitle } from "~/store";
+import { useDir, useTitle } from "~/store";
 
 import type { Property } from "csstype";
 
 const Viewer: Component = () => {
   const { setTitle } = useTitle();
+  const { setDir } = useDir();
   const [scale, setScale] = createSignal<number>(1.0);
   const [cursor, setCursor] = createSignal<Property.Cursor>("cursor-grab");
   const [filePath, setFilePath] = createSignal<string>("");
   const { draggable } = createDraggable();
   const [position, setPosition] = createSignal<{ x: number; y: number }>({ x: 0, y: 0 });
-
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  onMount(async () => {
-    const name = await getName();
-    const version = await getVersion();
-    const title = `${name} - v${version}`;
-    setTitle(title);
-    await appWindow.setTitle(title);
-  });
 
   onMount(() => {
     listen(TauriEvent.WINDOW_FILE_DROP, (event: Event<TauriEvent.WINDOW_FILE_DROP>) => {
@@ -54,8 +45,10 @@ const Viewer: Component = () => {
     setFilePath(convertFileSrc(path));
     // update window title
     const filename = await basename(path);
+    const dir = await dirname(path);
     const title = `${filename}`;
     setTitle(title);
+    setDir(dir);
     await appWindow.setTitle(title);
   };
 
