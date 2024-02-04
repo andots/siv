@@ -1,3 +1,4 @@
+import { getName, getVersion } from "@tauri-apps/api/app";
 import { readDir } from "@tauri-apps/api/fs";
 import { dirname, extname } from "@tauri-apps/api/path";
 import { clsx } from "clsx";
@@ -8,6 +9,12 @@ import type { ClassValue } from "clsx";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+export const getDefaultAppTitle = async () => {
+  const name = await getName();
+  const version = await getVersion();
+  return `${name} - v${version}`;
+};
 
 export const getImagesInDirectory = async (filePath: string) => {
   const targetDir = await dirname(filePath);
