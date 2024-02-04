@@ -2,6 +2,7 @@ import { createSignal, Switch, Match } from "solid-js";
 import type { Component } from "solid-js";
 
 import { createDraggable } from "@neodrag/solid";
+import { convertFileSrc } from "@tauri-apps/api/tauri";
 
 import { cn } from "~/lib/utils";
 import { useFilePath } from "~/store";
@@ -71,7 +72,7 @@ const Viewer: Component = () => {
                   "pointer-events": "none",
                   "object-fit": "contain",
                 }}
-                src={filePath()}
+                src={convertFileSrc(filePath())}
               />
             </div>
           </div>
