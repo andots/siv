@@ -10,6 +10,11 @@ export const useDir = () => {
   return { dir, setDir };
 };
 
+const [filePath, setFilePath] = createSignal<string>("");
+export const useFilePath = () => {
+  return { filePath, setFilePath };
+};
+
 const [files, setFiles] = createSignal<string[]>([]);
 export const useFiles = () => {
   return { files, setFiles };

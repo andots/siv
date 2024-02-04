@@ -1,56 +1,19 @@
-import { createSignal, onMount, Switch, Match } from "solid-js";
+import { createSignal, Switch, Match } from "solid-js";
 import type { Component } from "solid-js";
 
 import { createDraggable } from "@neodrag/solid";
-import { getMatches } from "@tauri-apps/api/cli";
-import { TauriEvent, listen, type Event } from "@tauri-apps/api/event";
-import { basename, dirname } from "@tauri-apps/api/path";
-import { convertFileSrc } from "@tauri-apps/api/tauri";
-import { appWindow } from "@tauri-apps/api/window";
 
 import { cn } from "~/lib/utils";
-import { useDir, useTitle } from "~/store";
+import { useFilePath } from "~/store";
 
 import type { Property } from "csstype";
 
 const Viewer: Component = () => {
-  const { setTitle } = useTitle();
-  const { setDir } = useDir();
+  const { filePath } = useFilePath();
   const [scale, setScale] = createSignal<number>(1.0);
   const [cursor, setCursor] = createSignal<Property.Cursor>("cursor-grab");
-  const [filePath, setFilePath] = createSignal<string>("");
   const { draggable } = createDraggable();
   const [position, setPosition] = createSignal<{ x: number; y: number }>({ x: 0, y: 0 });
-
-  onMount(() => {
-    listen(TauriEvent.WINDOW_FILE_DROP, (event: Event<TauriEvent.WINDOW_FILE_DROP>) => {
-      if (event.payload.length == 1) {
-        updateFilePath(event.payload[0]).catch((e) => console.log(e));
-      }
-    }).catch((e) => console.log(e));
-  });
-
-  onMount(() => {
-    getMatches()
-      .then((matches) => {
-        const match = matches.args["file"];
-        if (match != null && match.occurrences == 1 && typeof match.value === "string") {
-          updateFilePath(match.value).catch((e) => console.log(e));
-        }
-      })
-      .catch((e) => console.log(e));
-  });
-
-  const updateFilePath = async (path: string) => {
-    setFilePath(convertFileSrc(path));
-    // update window title
-    const filename = await basename(path);
-    const dir = await dirname(path);
-    const title = `${filename}`;
-    setTitle(title);
-    setDir(dir);
-    await appWindow.setTitle(title);
-  };
 
   const handleMouseWheel = (e: WheelEvent) => {
     // scroll up is zoom to 10%, down to -10%
