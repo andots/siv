@@ -1,5 +1,7 @@
 # Changelog
 
+## [0.6.1](https://github.com/andots/siv/compare/v0.6.0...v0.6.1) (2024-02-05)
+
 # [0.6.0](https://github.com/andots/siv/compare/v0.5.2...v0.6.0) (2024-02-04)
 
 
