@@ -133,7 +133,13 @@
       "csp": "default-src 'self'; img-src 'self' asset: https://asset.localhost; connect-src 'self' asset: https://asset.localhost;"
     },
     "updater": {
-      "active": false
+      "active": true,
+      "dialog": true,
+      "endpoints": ["https://github.com/andots/siv/releases/latest/download/latest.json"],
+      "windows": {
+        "installMode": "basicUi"
+      },
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDNFRjM3QzhERjU0NTNFMkQKUldRdFBrWDFqWHp6UHBFSWZSajc0UzB5WUtUbDZQekdtRkpBUktjaENPSmU5MGhtVE5BZEFzbCsK"
     }
   }
 }
