@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.2](https://github.com/andots/siv/compare/v0.6.1...v0.6.2) (2024-02-05)
+
+
+### Bug Fixes
+
+* Fix folder name to github/workflows ([0b369df](https://github.com/andots/siv/commit/0b369df387b8c0c7d930a1d98e2740091e61a5a5))
+
 ## [0.6.1](https://github.com/andots/siv/compare/v0.6.0...v0.6.1) (2024-02-05)
 
 # [0.6.0](https://github.com/andots/siv/compare/v0.5.2...v0.6.0) (2024-02-04)
