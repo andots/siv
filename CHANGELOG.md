@@ -1,5 +1,12 @@
 # Changelog
 
+# [0.7.0](https://github.com/andots/siv/compare/v0.6.2...v0.7.0) (2024-02-05)
+
+
+### Features
+
+* Auto updater using Tauri built-in updater ([1dc7ccf](https://github.com/andots/siv/commit/1dc7ccff110e035a8ff1d13f03dc2db75991113e))
+
 ## [0.6.2](https://github.com/andots/siv/compare/v0.6.1...v0.6.2) (2024-02-05)
 
 
