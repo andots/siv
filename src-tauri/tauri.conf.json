@@ -6,6 +6,9 @@
     "devPath": "http://localhost:4321",
     "distDir": "../dist"
   },
+  "package": {
+    "productName": "siv"
+  },
   "tauri": {
     "windows": [
       {
@@ -108,8 +111,9 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "siv",
-      "longDescription": "",
+      "identifier": "com.andots.siv",
+      "shortDescription": "siv - Simple Image Viewer",
+      "longDescription": "siv is a Simple Image Viewer",
       "macOS": {
         "entitlements": null,
         "exceptionDomain": "",
@@ -118,7 +122,6 @@
         "signingIdentity": null
       },
       "resources": [],
-      "shortDescription": "",
       "targets": "all",
       "windows": {
         "certificateThumbprint": null,
