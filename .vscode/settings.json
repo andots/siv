@@ -2,6 +2,7 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
+  "markdownlint.ignore": ["CHANGELOG.md"],
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": ["source.sortMembers", "source.fixAll.eslint"]
 }

@@ -1,0 +1,65 @@
+name: "release"
+on:
+  push:
+    tags: [v\d+\.\d+\.\d+]
+  workflow_dispatch:
+
+jobs:
+  publish-tauri:
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [macos-latest, ubuntu-20.04, windows-latest]
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies (ubuntu only)
+        if: matrix.platform == 'ubuntu-20.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install frontend dependencies
+        run: pnpm install
+
+      - name: Conventional changelog action
+        id: changelog
+        # https://github.com/TriPSs/conventional-changelog-action
+        uses: TriPSs/conventional-changelog-action@v5
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          output-file: "false" # File to output the changelog to. Default CHANGELOG.md, when providing 'false' no file will be generated / updated.
+          git-push: "false" # Push all the GIT changes. Default true
+          preset: "angular"
+          skip-git-pull: "true" # Do not pull the repo before tagging. Ensure you full cloned the repo in the first place to get tags. Default 'false'.
+          skip-version-file: "true" # Do not update the version file. Default 'false'.
+          skip-commit: "true" # Do not create a release commit. Default 'false'.
+          skip-tag: "true" # Do not tag the release. Helpful for using action to check if a release is going to be made. Default 'false'.
+
+      - uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
+          releaseName: "Release v__VERSION__"
+          releaseBody: ${{ steps.changelog.outputs.clean_changelog }}
+          releaseDraft: true
+          prerelease: false
