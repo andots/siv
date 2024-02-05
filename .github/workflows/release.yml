@@ -1,7 +1,8 @@
 name: "release"
 on:
   push:
-    tags: [v\d+\.\d+\.\d+]
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+
   workflow_dispatch:
 
 jobs:
@@ -40,19 +41,13 @@ jobs:
       - name: Install frontend dependencies
         run: pnpm install
 
-      - name: Conventional changelog action
+      - name: Update CHANGELOG
         id: changelog
-        # https://github.com/TriPSs/conventional-changelog-action
-        uses: TriPSs/conventional-changelog-action@v5
+        uses: requarks/changelog-action@v1
         with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
-          output-file: "false" # File to output the changelog to. Default CHANGELOG.md, when providing 'false' no file will be generated / updated.
-          git-push: "false" # Push all the GIT changes. Default true
-          preset: "angular"
-          skip-git-pull: "true" # Do not pull the repo before tagging. Ensure you full cloned the repo in the first place to get tags. Default 'false'.
-          skip-version-file: "true" # Do not update the version file. Default 'false'.
-          skip-commit: "true" # Do not create a release commit. Default 'false'.
-          skip-tag: "true" # Do not tag the release. Helpful for using action to check if a release is going to be made. Default 'false'.
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+          writeToFile: "false"
 
       - uses: tauri-apps/tauri-action@v0
         env:
@@ -60,6 +55,20 @@ jobs:
         with:
           tagName: v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
           releaseName: "Release v__VERSION__"
-          releaseBody: ${{ steps.changelog.outputs.clean_changelog }}
+          releaseBody: ${{ steps.changelog.outputs.changes }}
           releaseDraft: true
           prerelease: false
+
+      # - name: Conventional changelog action
+      #   id: changelog
+      #   # https://github.com/TriPSs/conventional-changelog-action
+      #   uses: TriPSs/conventional-changelog-action@v5
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     output-file: "false" # File to output the changelog to. Default CHANGELOG.md, when providing 'false' no file will be generated / updated.
+      #     git-push: "false" # Push all the GIT changes. Default true
+      #     preset: "angular"
+      #     skip-git-pull: "true" # Do not pull the repo before tagging. Ensure you full cloned the repo in the first place to get tags. Default 'false'.
+      #     skip-version-file: "true" # Do not update the version file. Default 'false'.
+      #     skip-commit: "true" # Do not create a release commit. Default 'false'.
+      #     skip-tag: "true" # Do not tag the release. Helpful for using action to check if a release is going to be made. Default 'false'.
