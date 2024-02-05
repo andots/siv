@@ -12,6 +12,7 @@
   "tauri": {
     "windows": [
       {
+        "title": "siv",
         "fullscreen": false,
         "resizable": true,
         "width": 800,
