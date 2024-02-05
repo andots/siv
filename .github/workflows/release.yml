@@ -68,7 +68,7 @@ jobs:
           tagName: v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
           releaseName: "Release v__VERSION__"
           releaseBody: ${{ steps.changelog.outputs.changes }}
-          releaseDraft: true
+          releaseDraft: false
           prerelease: false
 
       # - name: Conventional changelog action
