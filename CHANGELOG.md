@@ -1,5 +1,17 @@
 # Changelog
 
+# [0.8.0](https://github.com/andots/siv/compare/v0.7.0...v0.8.0) (2024-02-06)
+
+
+### Bug Fixes
+
+* Set default window title in tauri.conf.json ([e076ef8](https://github.com/andots/siv/commit/e076ef8c6263e98bb8c32633c135fa28e3db8574))
+
+
+### Features
+
+* create new window from Rust side ([8e41805](https://github.com/andots/siv/commit/8e41805088ee11e4e24e6944a7ebae5db0efeb6a))
+
 # [0.7.0](https://github.com/andots/siv/compare/v0.6.2...v0.7.0) (2024-02-05)
 
 
