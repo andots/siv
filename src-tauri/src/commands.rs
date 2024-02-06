@@ -1,14 +1,6 @@
 use std::path::PathBuf;
 
-use tauri::{Manager, WindowUrl};
-use window_shadows::set_shadow;
-
-#[tauri::command]
-pub fn apply_set_shadow(window: tauri::Window, label: String) {
-    if let Some(target) = window.get_window(&label) {
-        set_shadow(&target, true).expect("Unsupported Platform!");
-    }
-}
+use crate::utils::set_shadow_to_window;
 
 #[tauri::command]
 pub async fn create_window(
@@ -18,30 +10,12 @@ pub async fn create_window(
 ) -> Result<(), String> {
     let mut config = app.config().tauri.windows.get(0).unwrap().clone();
     config.label = label; // set given label
-    config.url = WindowUrl::App(PathBuf::from(path)); // set given path
-    let window = tauri::window::WindowBuilder::from_config(&app, config)
+    config.url = tauri::WindowUrl::App(PathBuf::from(path)); // set given path
+    let window = tauri::WindowBuilder::from_config(&app, config)
         .build()
         .expect("Can't open new window!");
 
-    // Apply set_shadow to the window (Windows and MacOS only)
-    #[cfg(any(windows, target_os = "macos"))]
-    {
-        set_shadow(&window, true).expect("Window Shadow: Unsupported Platform!");
-    }
+    set_shadow_to_window(&window).unwrap();
 
     Ok(())
 }
-
-// let window =
-//     tauri::window::WindowBuilder::new(&app, &label, tauri::WindowUrl::App(path.into()))
-//         .title(config.title)
-//         .decorations(config.decorations)
-//         .fullscreen(config.fullscreen)
-//         .resizable(config.resizable)
-//         .inner_size(config.width, config.height)
-//         .min_inner_size(
-//             config.min_width.unwrap_or(300.),
-//             config.min_height.unwrap_or(300.),
-//         )
-//         .build()
-//         .expect("Can't open new window.");
