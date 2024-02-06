@@ -22,7 +22,13 @@ pub async fn create_window(
     let window = tauri::window::WindowBuilder::from_config(&app, config)
         .build()
         .expect("Can't open new window!");
-    window_shadows::set_shadow(&window, true).expect("Window Shadow: Unsupported Platform!");
+
+    // Apply set_shadow to the window (Windows and MacOS only)
+    #[cfg(any(windows, target_os = "macos"))]
+    {
+        set_shadow(&window, true).expect("Window Shadow: Unsupported Platform!");
+    }
+
     Ok(())
 }
 

@@ -9,12 +9,18 @@ use window_shadows::set_shadow;
 fn main() {
     tauri::Builder::default()
         .setup(|app| {
-            let window = app.get_window("main").unwrap();
-            set_shadow(&window, true).expect("Unsupported platform!");
+            let _window = app.get_window("main").unwrap();
+
+            // Apply set_shadow to the window (Windows and MacOS only)
+            #[cfg(any(windows, target_os = "macos"))]
+            {
+                set_shadow(&_window, true).expect("Window Shadow: Unsupported Platform!");
+            }
+
             // open devtools on debug builds
             #[cfg(debug_assertions)]
             {
-                window.open_devtools();
+                _window.open_devtools();
             }
             Ok(())
         })
