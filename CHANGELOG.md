@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.8.1](https://github.com/andots/siv/compare/v0.8.0...v0.8.1) (2024-02-06)
+
+
+### Bug Fixes
+
+* apply set_shadow Windows and Mac only ([969ccab](https://github.com/andots/siv/commit/969ccabf0fe3693aeadc09e680fe9fd0eb418641))
+* updater installMode to passive ([f2711dd](https://github.com/andots/siv/commit/f2711ddf92355e9a329d7c148ac78295b6162d2d))
+
 # [0.8.0](https://github.com/andots/siv/compare/v0.7.0...v0.8.0) (2024-02-06)
 
 
