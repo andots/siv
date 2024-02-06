@@ -1,6 +1,6 @@
 import { createSignal, type Component } from "solid-js";
 
-import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
+import { appWindow } from "@tauri-apps/api/window";
 import {
   CodiconChevronLeft,
   CodiconChevronRight,
@@ -13,7 +13,7 @@ import {
 
 import { Button } from "~/components/ui/button";
 import { TITLEBAR_HEIGHT, TITLEBAR_HEIGHT_PX } from "~/constants";
-import { invokeApplySetShadow } from "~/invokes";
+import { invokeCreateWindow } from "~/invokes";
 import { joinOsPaths } from "~/lib/utils";
 import { useDir, useFileName, useFilePath, useFiles, useTitle } from "~/store";
 
@@ -83,26 +83,7 @@ const TitleBar: Component = () => {
   };
 
   const createWindow = () => {
-    const webview = new WebviewWindow(`w-${Date.now()}`, {
-      url: "index.html",
-      decorations: false,
-      fullscreen: false,
-      resizable: true,
-      width: 800,
-      height: 1000,
-      minWidth: 300,
-      minHeight: 300,
-    });
-    webview
-      .once("tauri://created", (e) => {
-        invokeApplySetShadow(e.windowLabel).catch((e) => console.log(e));
-      })
-      .catch((e) => console.log(e));
-    webview
-      .once("tauri://error", (e) => {
-        console.log(e);
-      })
-      .catch((e) => console.log(e));
+    invokeCreateWindow(`w-${Date.now()}`, "index.html").catch((e) => console.log(e));
   };
 
   return (

@@ -18,7 +18,10 @@ fn main() {
             }
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![commands::apply_set_shadow])
+        .invoke_handler(tauri::generate_handler![
+            commands::apply_set_shadow,
+            commands::create_window
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
