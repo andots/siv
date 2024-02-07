@@ -1,6 +1,6 @@
 import { getName, getVersion } from "@tauri-apps/api/app";
 import { readDir } from "@tauri-apps/api/fs";
-import { dirname, extname, sep } from "@tauri-apps/api/path";
+import { basename, dirname, extname, sep } from "@tauri-apps/api/path";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -48,4 +48,12 @@ export const joinOsPaths = (paths: string[]) => {
 
 export const isNotEmpty = (str: string | undefined | null) => {
   return str != null && str !== "";
+};
+
+export const getFileName = async (path: string) => {
+  return await basename(path);
+};
+
+export const getDirName = async (path: string) => {
+  return await dirname(path);
 };
