@@ -6,7 +6,6 @@ authors = ["andots"]
 repository = "https://github.com/andots/siv"
 default-run = "siv"
 edition = "2021"
-rust-version = "1.60"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
