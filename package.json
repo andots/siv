@@ -17,6 +17,7 @@
     "@astrojs/tailwind": "^5.1.0",
     "@kobalte/core": "^0.12.1",
     "@neodrag/solid": "^2.0.3",
+    "@solid-primitives/event-listener": "^2.3.1",
     "@tauri-apps/api": "^1.5.3",
     "astro": "^4.2.7",
     "class-variance-authority": "^0.7.0",
