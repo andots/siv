@@ -13,7 +13,7 @@ import {
 
 import { Button } from "~/components/ui/button";
 import { TITLEBAR_HEIGHT, TITLEBAR_HEIGHT_PX } from "~/constants";
-import { invokeCreateWindow } from "~/invokes";
+import * as invokes from "~/invokes";
 import { joinOsPaths } from "~/lib/utils";
 import { useDir, useFileName, useFilePath, useFiles, useTitle } from "~/store";
 
@@ -83,7 +83,7 @@ const TitleBar: Component = () => {
   };
 
   const createWindow = () => {
-    invokeCreateWindow(`w-${Date.now()}`, "index.html").catch((e) => console.log(e));
+    invokes.createWindow(`w-${Date.now()}`, "index.html").catch((e) => console.log(e));
   };
 
   return (
