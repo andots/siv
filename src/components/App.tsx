@@ -6,13 +6,8 @@ import { appWindow } from "@tauri-apps/api/window";
 
 import TitleBar from "~/components/TitleBar";
 import Viewer from "~/components/Viewer";
-import {
-  getDefaultAppTitle,
-  getDirName,
-  getFileName,
-  getImagesInDirectory,
-  isNotEmpty,
-} from "~/lib/utils";
+import { invokeGetDefaultAppTitle } from "~/invokes";
+import { getDirName, getFileName, getImagesInDirectory, isNotEmpty } from "~/lib/utils";
 import { useDir, useFileName, useFilePath, useFiles, useTitle } from "~/store";
 
 const App: Component = () => {
@@ -23,7 +18,7 @@ const App: Component = () => {
   const { setFileName } = useFileName();
 
   onMount(() => {
-    getDefaultAppTitle()
+    invokeGetDefaultAppTitle()
       .then((title) => setTitle(title))
       .then((title) => appWindow.setTitle(title))
       .catch((e) => console.log(e));

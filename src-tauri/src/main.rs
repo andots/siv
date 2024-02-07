@@ -20,7 +20,10 @@ fn main() {
             }
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![commands::create_window])
+        .invoke_handler(tauri::generate_handler![
+            commands::create_window,
+            commands::get_default_app_title
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

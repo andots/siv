@@ -3,6 +3,16 @@ use std::path::PathBuf;
 use crate::utils::set_shadow_to_window;
 
 #[tauri::command]
+pub async fn get_default_app_title(app: tauri::AppHandle) -> String {
+    let title = format!(
+        "{} - v{}",
+        app.package_info().name,
+        app.package_info().version
+    );
+    title
+}
+
+#[tauri::command]
 pub async fn create_window(
     app: tauri::AppHandle,
     label: String,
