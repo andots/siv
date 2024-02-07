@@ -76,7 +76,7 @@ const App: Component = () => {
   );
 
   return (
-    <div class="overflow-hidden flex flex-col">
+    <div class="overflow-hidden flex flex-col select-none">
       <TitleBar />
       <Viewer />
     </div>
