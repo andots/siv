@@ -1,8 +1,8 @@
 import { createEffect, on, onMount, type Component } from "solid-js";
 
-import { getMatches } from "@tauri-apps/api/cli";
 import { TauriEvent, type Event } from "@tauri-apps/api/event";
-import { appWindow } from "@tauri-apps/api/window";
+import { WebviewWindow } from "@tauri-apps/api/webview";
+import { getMatches } from "@tauri-apps/plugin-cli";
 
 import TitleBar from "~/components/TitleBar";
 import Viewer from "~/components/Viewer";
@@ -25,13 +25,13 @@ const App: Component = () => {
   onMount(() => {
     getDefaultAppTitle()
       .then((title) => setTitle(title))
-      .then((title) => appWindow.setTitle(title))
+      .then((title) => WebviewWindow.getCurrent().setTitle(title))
       .catch((e) => console.log(e));
   });
 
   onMount(() => {
-    appWindow
-      .listen(TauriEvent.WINDOW_FILE_DROP, (event: Event<TauriEvent.WINDOW_FILE_DROP>) => {
+    WebviewWindow.getCurrent()
+      .listen(TauriEvent.WEBVIEW_FILE_DROP, (event: Event<TauriEvent.WEBVIEW_FILE_DROP>) => {
         if (event.payload.length == 1) {
           setFilePath(event.payload[0]);
         }
@@ -70,7 +70,7 @@ const App: Component = () => {
         setFileName(filename);
         setTitle(title);
         setDir(dir);
-        await appWindow.setTitle(title);
+        await WebviewWindow.getCurrent().setTitle(title);
       }
     })
   );

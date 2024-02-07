@@ -1,6 +1,6 @@
 import { getName, getVersion } from "@tauri-apps/api/app";
-import { readDir } from "@tauri-apps/api/fs";
 import { basename, dirname, extname, sep } from "@tauri-apps/api/path";
+import { readDir } from "@tauri-apps/plugin-fs";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -21,7 +21,7 @@ export const getImagesInDirectory = async (filePath: string) => {
   const entries = await readDir(targetDir);
   const images: string[] = [];
   for (const entry of entries) {
-    const ext = (await extname(entry.path)).toLowerCase();
+    const ext = (await extname(entry.name)).toLowerCase();
     if (
       entry.name &&
       (ext === "jpg" ||
@@ -43,7 +43,7 @@ export const getImagesInDirectory = async (filePath: string) => {
 };
 
 export const joinOsPaths = (paths: string[]) => {
-  return paths.join(sep);
+  return paths.join(sep());
 };
 
 export const isNotEmpty = (str: string | undefined | null) => {

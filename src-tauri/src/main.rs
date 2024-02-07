@@ -5,13 +5,13 @@ mod commands;
 mod utils;
 
 use tauri::Manager;
-use utils::set_shadow_to_window;
+// use utils::set_shadow_to_window;
 
 fn main() {
     tauri::Builder::default()
         .setup(|app| {
-            let window = app.get_window("main").unwrap();
-            set_shadow_to_window(&window).unwrap();
+            let window = app.get_webview_window("main").unwrap();
+            // set_shadow_to_window(&window).unwrap();
 
             // open devtools on debug builds
             #[cfg(debug_assertions)]
@@ -20,6 +20,8 @@ fn main() {
             }
             Ok(())
         })
+        .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_cli::init())
         .invoke_handler(tauri::generate_handler![commands::create_window])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

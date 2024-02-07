@@ -4,38 +4,23 @@ version = "0.8.1"
 description = "SIV is a Simple Image Viewer"
 authors = ["andots"]
 repository = "https://github.com/andots/siv"
-default-run = "siv"
 edition = "2021"
-rust-version = "1.60"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "1.5.1", features = [] }
+tauri-build = { version = "2.0.0-beta", features = [] }
 
 [dependencies]
 serde_json = "1.0"
-serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.5.4", features = [
-  "updater",
-  "fs-exists",
-  "fs-read-dir",
-  "window-start-dragging",
-  "window-create",
-  "window-close",
-  "window-minimize",
-  "window-unminimize",
-  "window-hide",
-  "window-unmaximize",
-  "window-show",
-  "window-maximize",
-  "app-all",
-  "window-set-title",
-  "protocol-all",
-  "path-all",
-  "cli",
-] }
+tauri = { version = "2.0.0-beta", features = ["protocol-asset"] }
 window-shadows = { git = "https://github.com/tauri-apps/window-shadows.git" }
+tauri-plugin-fs = "2.0.0-beta"
+
+[target."cfg(not(any(target_os = \"android\", target_os = \"ios\")))".dependencies]
+tauri-plugin-cli = "2.0.0-beta"
+
+# serde = { version = "1.0", features = ["derive"] }
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.
@@ -49,3 +34,6 @@ panic = "abort"   # Strip expensive panic clean-up logic
 codegen-units = 1 # Compile crates one after another so the compiler can optimize better
 lto = true        # Enables link to optimizations
 opt-level = "s"   # Optimize for binary size
+
+# [lib]
+# crate-type = ["staticlib", "cdylib", "rlib"]

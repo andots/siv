@@ -1,146 +1,85 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "productName": "siv",
+  "app": {
+    "security": {
+      "assetProtocol": {
+        "enable": true,
+        "scope": ["**"]
+      },
+      "csp": "default-src 'self'; img-src 'self' asset: https://asset.localhost; connect-src ipc: http://ipc.localhost 'self' asset: https://asset.localhost;"
+    },
+    "windows": [
+      {
+        "decorations": false,
+        "fullscreen": false,
+        "height": 1000,
+        "minHeight": 300,
+        "minWidth": 300,
+        "resizable": true,
+        "title": "siv",
+        "width": 800
+      }
+    ]
+  },
   "build": {
     "beforeBuildCommand": "pnpm build",
     "beforeDevCommand": "pnpm dev",
-    "devPath": "http://localhost:4321",
-    "distDir": "../dist"
+    "devUrl": "http://localhost:4321",
+    "frontendDist": "../dist"
   },
-  "package": {
-    "productName": "siv"
-  },
-  "tauri": {
-    "windows": [
-      {
-        "title": "siv",
-        "fullscreen": false,
-        "resizable": true,
-        "width": 800,
-        "height": 1000,
-        "minWidth": 300,
-        "minHeight": 300,
-        "decorations": false
-      }
+  "bundle": {
+    "active": true,
+    "category": "Photography",
+    "copyright": "",
+    "externalBin": [],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
     ],
-    "cli": {
-      "description": "Load file",
-      "args": [
-        {
-          "name": "file",
-          "index": 1,
-          "takesValue": true
-        }
-      ]
-    },
-    "allowlist": {
-      "all": false,
-      "app": {
-        "all": true,
-        "hide": false,
-        "show": false
-      },
-      "protocol": {
-        "all": true,
-        "asset": true,
-        "assetScope": ["**"]
-      },
-      "path": {
-        "all": true
-      },
-      "fs": {
-        "all": false,
-        "exists": true,
-        "scope": ["**"],
-        "readDir": true,
-        "copyFile": false,
-        "createDir": false,
-        "readFile": false,
-        "removeDir": false,
-        "removeFile": false,
-        "renameFile": false,
-        "writeFile": false
-      },
-      "window": {
-        "all": false,
-        "center": false,
-        "close": true,
-        "create": true,
-        "hide": true,
-        "maximize": true,
-        "minimize": true,
-        "show": true,
-        "startDragging": true,
-        "unmaximize": true,
-        "unminimize": true,
-        "setTitle": true,
-        "print": false,
-        "requestUserAttention": false,
-        "setAlwaysOnTop": false,
-        "setClosable": false,
-        "setContentProtected": false,
-        "setCursorGrab": false,
-        "setCursorIcon": false,
-        "setCursorPosition": false,
-        "setCursorVisible": false,
-        "setDecorations": false,
-        "setFocus": false,
-        "setFullscreen": false,
-        "setIcon": false,
-        "setIgnoreCursorEvents": false,
-        "setMaxSize": false,
-        "setMaximizable": false,
-        "setMinSize": false,
-        "setMinimizable": false,
-        "setPosition": false,
-        "setResizable": false,
-        "setSize": false,
-        "setSkipTaskbar": false
-      }
-    },
-    "bundle": {
-      "active": true,
-      "category": "Photography",
-      "copyright": "",
+    "linux": {
       "deb": {
         "depends": []
-      },
-      "externalBin": [],
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "identifier": "com.andots.siv",
-      "shortDescription": "siv - Simple Image Viewer",
-      "longDescription": "siv is a Simple Image Viewer",
-      "macOS": {
-        "entitlements": null,
-        "exceptionDomain": "",
-        "frameworks": [],
-        "providerShortName": null,
-        "signingIdentity": null
-      },
-      "resources": [],
-      "targets": "all",
-      "windows": {
-        "certificateThumbprint": null,
-        "digestAlgorithm": "sha256",
-        "timestampUrl": ""
       }
     },
-    "security": {
-      "csp": "default-src 'self'; img-src 'self' asset: https://asset.localhost; connect-src 'self' asset: https://asset.localhost;"
+    "longDescription": "siv is a Simple Image Viewer",
+    "macOS": {
+      "entitlements": null,
+      "exceptionDomain": "",
+      "frameworks": [],
+      "providerShortName": null,
+      "signingIdentity": null
+    },
+    "resources": [],
+    "shortDescription": "siv - Simple Image Viewer",
+    "targets": "all",
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": ""
+    }
+  },
+  "identifier": "com.andots.siv",
+  "plugins": {
+    "cli": {
+      "args": [
+        {
+          "index": 1,
+          "name": "file",
+          "takesValue": true
+        }
+      ],
+      "description": "Load file"
     },
     "updater": {
-      "active": true,
-      "dialog": true,
       "endpoints": ["https://github.com/andots/siv/releases/latest/download/latest.json"],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDNFRjM3QzhERjU0NTNFMkQKUldRdFBrWDFqWHp6UHBFSWZSajc0UzB5WUtUbDZQekdtRkpBUktjaENPSmU5MGhtVE5BZEFzbCsK",
       "windows": {
         "installMode": "passive"
-      },
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDNFRjM3QzhERjU0NTNFMkQKUldRdFBrWDFqWHp6UHBFSWZSajc0UzB5WUtUbDZQekdtRkpBUktjaENPSmU5MGhtVE5BZEFzbCsK"
+      }
     }
   }
 }

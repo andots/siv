@@ -1,6 +1,8 @@
 use std::path::PathBuf;
 
-use crate::utils::set_shadow_to_window;
+use tauri::WebviewUrl;
+
+// use crate::utils::set_shadow_to_window;
 
 #[tauri::command]
 pub async fn create_window(
@@ -8,14 +10,15 @@ pub async fn create_window(
     label: String,
     path: String,
 ) -> Result<(), String> {
-    let mut config = app.config().tauri.windows.get(0).unwrap().clone();
+    let mut config = app.config().app.windows.first().unwrap().clone();
     config.label = label; // set given label
-    config.url = tauri::WindowUrl::App(PathBuf::from(path)); // set given path
-    let window = tauri::WindowBuilder::from_config(&app, config)
+    config.url = WebviewUrl::App(PathBuf::from(path)); // set given path
+    let _window = tauri::WebviewWindowBuilder::from_config(&app, &config)
+        .unwrap()
         .build()
         .expect("Can't open new window!");
 
-    set_shadow_to_window(&window).unwrap();
+    // set_shadow_to_window(&window).unwrap();
 
     Ok(())
 }

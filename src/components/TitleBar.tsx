@@ -1,6 +1,6 @@
 import { createSignal, type Component } from "solid-js";
 
-import { appWindow } from "@tauri-apps/api/window";
+import { WebviewWindow } from "@tauri-apps/api/webview";
 import {
   CodiconChevronLeft,
   CodiconChevronRight,
@@ -42,16 +42,25 @@ const TitleBar: Component = () => {
   const [maximized, setMaximized] = createSignal<boolean>(false);
 
   const minimize = () => {
-    appWindow.minimize().catch((e) => console.log(e));
+    WebviewWindow.getCurrent()
+      .minimize()
+      .catch((e) => console.log(e));
+    // appWindow.minimize().catch((e) => console.log(e));
   };
 
   const toggleMaximize = () => {
     setMaximized(!maximized());
-    appWindow.toggleMaximize().catch((e) => console.log(e));
+    WebviewWindow.getCurrent()
+      .toggleMaximize()
+      .catch((e) => console.log(e));
+    // appWindow.toggleMaximize().catch((e) => console.log(e));
   };
 
   const close = () => {
-    appWindow.close().catch((e) => console.log(e));
+    WebviewWindow.getCurrent()
+      .close()
+      .catch((e) => console.log(e));
+    // appWindow.close().catch((e) => console.log(e));
   };
 
   const next = () => {

@@ -2,7 +2,7 @@ import { createSignal, Switch, Match } from "solid-js";
 import type { Component } from "solid-js";
 
 import { createDraggable } from "@neodrag/solid";
-import { convertFileSrc } from "@tauri-apps/api/tauri";
+import { convertFileSrc } from "@tauri-apps/api/core";
 
 import { cn } from "~/lib/utils";
 import { useFilePath } from "~/store";
