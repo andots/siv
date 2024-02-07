@@ -92,7 +92,7 @@ const TitleBar: Component = () => {
   };
 
   const createWindow = () => {
-    invokeCreateWindow(`w-${Date.now()}`, "index.html").catch((e) => console.log(e));
+    invokeCreateWindow(`main-${Date.now()}`, "index.html").catch((e) => console.log(e));
   };
 
   return (
