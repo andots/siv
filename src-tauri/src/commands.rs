@@ -8,7 +8,7 @@ pub async fn create_window(
     label: String,
     path: String,
 ) -> Result<(), String> {
-    let mut config = app.config().tauri.windows.get(0).unwrap().clone();
+    let mut config = app.config().tauri.windows.first().unwrap().clone();
     config.label = label; // set given label
     config.url = tauri::WindowUrl::App(PathBuf::from(path)); // set given path
     let window = tauri::WindowBuilder::from_config(&app, config)
