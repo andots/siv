@@ -27,6 +27,11 @@ pub async fn create_window(
         .build()
         .expect("Can't open new window!");
 
+    #[cfg(debug_assertions)]
+    {
+        window.open_devtools();
+    }
+
     set_shadow_to_window(&window).unwrap();
 
     Ok(())
