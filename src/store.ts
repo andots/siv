@@ -1,34 +1,8 @@
-import { createSignal } from "solid-js";
-
 import { createFluxStore } from "@solid-primitives/flux-store";
 import { appWindow } from "@tauri-apps/api/window";
 
 import * as invokes from "~/invokes";
-
-const [title, setTitle] = createSignal<string>("");
-export const useTitle = () => {
-  return { title, setTitle };
-};
-
-const [dir, setDir] = createSignal<string>("");
-export const useDir = () => {
-  return { dir, setDir };
-};
-
-const [filePath, setFilePath] = createSignal<string>("");
-export const useFilePath = () => {
-  return { filePath, setFilePath };
-};
-
-const [fileName, setFileName] = createSignal<string>("");
-export const useFileName = () => {
-  return { fileName, setFileName };
-};
-
-const [files, setFiles] = createSignal<string[]>([]);
-export const useFiles = () => {
-  return { files, setFiles };
-};
+import { getFileName, logError } from "~/lib/utils";
 
 type AppState = {
   title: string;
@@ -62,20 +36,24 @@ const appState = createFluxStore(initAppState(), {
       return state.currentFilePath;
     },
   }),
-  actions: (setState) => ({
+  actions: (setState, _state) => ({
     reset: () => {
       setState(initAppState());
     },
     setTitle: (title: string) => {
       setState("title", title);
+      appWindow.setTitle(title).catch(logError);
     },
     setDefaultTitle: async () => {
       const title = await invokes.getDefaultAppTitle();
       await appWindow.setTitle(title); // set title for tauri window
       setState("title", title);
     },
-    setCurrentFilePath: (path: string) => {
+    setCurrentFilePath: async (path: string) => {
       setState("currentFilePath", path);
+      const filename = await getFileName(path);
+      setState("title", filename);
+      await appWindow.setTitle(filename);
     },
   }),
 });

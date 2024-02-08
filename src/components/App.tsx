@@ -6,16 +6,10 @@ import { appWindow } from "@tauri-apps/api/window";
 
 import TitleBar from "~/components/TitleBar";
 import Viewer from "~/components/Viewer";
-import * as invokes from "~/invokes";
-import { getDirName, getFileName, isNotEmpty, logError } from "~/lib/utils";
-import { useAppState, useDir, useFileName, useFilePath, useFiles, useTitle } from "~/store";
+import { logError } from "~/lib/utils";
+import { useAppState } from "~/store";
 
 const App: Component = () => {
-  const { dir, setDir } = useDir();
-  const { setTitle } = useTitle();
-  const { setFiles } = useFiles();
-  const { filePath, setFilePath } = useFilePath();
-  const { setFileName } = useFileName();
   const { appState } = useAppState();
 
   onMount(() => {
@@ -23,20 +17,13 @@ const App: Component = () => {
   });
 
   onMount(() => {
-    invokes
-      .getDefaultAppTitle()
-      .then((title) => setTitle(title))
-      .catch((e) => console.log(e));
-  });
-
-  onMount(() => {
     appWindow
       .listen(TauriEvent.WINDOW_FILE_DROP, (event: Event<TauriEvent.WINDOW_FILE_DROP>) => {
         if (event.payload.length == 1) {
-          setFilePath(event.payload[0]);
+          appState.actions.setCurrentFilePath(event.payload[0]).catch(logError);
         }
       })
-      .catch((e) => console.log(e));
+      .catch(logError);
   });
 
   onMount(() => {
@@ -44,40 +31,31 @@ const App: Component = () => {
       .then((matches) => {
         const match = matches.args["file"];
         if (match != null && match.occurrences == 1 && typeof match.value === "string") {
-          setFilePath(match.value);
+          appState.actions.setCurrentFilePath(match.value).catch(logError);
         }
       })
-      .catch((e) => console.log(e));
+      .catch(logError);
   });
 
   createEffect(
-    on(dir, () => {
-      if (isNotEmpty(filePath())) {
-        invokes
-          .getImagesInDir(filePath())
-          .then((files) => {
-            console.log(files);
-            setFiles(files);
-          })
-          .catch((e) => console.log(e));
-      }
+    on(appState.getters.currentFilePath, () => {
+      // console.log(appState.getters.currentFilePath());
     })
   );
 
-  // set title, filename, dir on filePath changed
-  createEffect(
-    on(filePath, async () => {
-      if (isNotEmpty(filePath())) {
-        const filename = await getFileName(filePath());
-        const dir = await getDirName(filePath());
-        const title = `${filename}`;
-        setFileName(filename);
-        setTitle(title);
-        setDir(dir);
-        await appWindow.setTitle(title);
-      }
-    })
-  );
+  // createEffect(
+  //   on(dir, () => {
+  //     if (isNotEmpty(filePath())) {
+  //       invokes
+  //         .getImagesInDir(filePath())
+  //         .then((files) => {
+  //           console.log(files);
+  //           setFiles(files);
+  //         })
+  //         .catch((e) => console.log(e));
+  //     }
+  //   })
+  // );
 
   return (
     <div class="overflow-hidden flex flex-col select-none">

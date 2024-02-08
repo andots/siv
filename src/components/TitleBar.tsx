@@ -14,8 +14,7 @@ import {
 import { Button } from "~/components/ui/button";
 import { TITLEBAR_HEIGHT, TITLEBAR_HEIGHT_PX } from "~/constants";
 import * as invokes from "~/invokes";
-import { joinOsPaths } from "~/lib/utils";
-import { useAppState, useDir, useFileName, useFilePath, useFiles } from "~/store";
+import { useAppState } from "~/store";
 
 import type { IconTypes } from "solid-iconify";
 
@@ -34,13 +33,8 @@ const TitleBarButton: Component<Props> = (props) => {
 };
 
 const TitleBar: Component = () => {
-  // const { title } = useTitle();
-  const { files } = useFiles();
-  const { dir } = useDir();
-  const { fileName } = useFileName();
-  const { setFilePath } = useFilePath();
-  const [maximized, setMaximized] = createSignal<boolean>(false);
   const { appState } = useAppState();
+  const [maximized, setMaximized] = createSignal<boolean>(false);
 
   const minimize = () => {
     appWindow.minimize().catch((e) => console.log(e));
@@ -56,31 +50,31 @@ const TitleBar: Component = () => {
   };
 
   const next = () => {
-    const currentIndex = files().findIndex((v) => v === fileName());
-    if (currentIndex != -1) {
-      if (currentIndex == files().length - 1) {
-        // current is end of array, so go to the start of array
-        const target = files().at(0);
-        if (target) setFilePath(joinOsPaths([dir(), target]));
-      } else {
-        const target = files().at(currentIndex + 1);
-        if (target) setFilePath(joinOsPaths([dir(), target]));
-      }
-    }
+    // const currentIndex = files().findIndex((v) => v === fileName());
+    // if (currentIndex != -1) {
+    //   if (currentIndex == files().length - 1) {
+    //     // current is end of array, so go to the start of array
+    //     const target = files().at(0);
+    //     if (target) setFilePath(joinOsPaths([dir(), target]));
+    //   } else {
+    //     const target = files().at(currentIndex + 1);
+    //     if (target) setFilePath(joinOsPaths([dir(), target]));
+    //   }
+    // }
   };
 
   const prev = () => {
-    const currentIndex = files().findIndex((v) => v === fileName());
-    if (currentIndex != -1) {
-      if (currentIndex == 0) {
-        // current is start is array, so go to the end of array
-        const target = files().at(files().length - 1);
-        if (target) setFilePath(joinOsPaths([dir(), target]));
-      } else {
-        const target = files().at(currentIndex - 1);
-        if (target) setFilePath(joinOsPaths([dir(), target]));
-      }
-    }
+    // const currentIndex = files().findIndex((v) => v === fileName());
+    // if (currentIndex != -1) {
+    //   if (currentIndex == 0) {
+    //     // current is start is array, so go to the end of array
+    //     const target = files().at(files().length - 1);
+    //     if (target) setFilePath(joinOsPaths([dir(), target]));
+    //   } else {
+    //     const target = files().at(currentIndex - 1);
+    //     if (target) setFilePath(joinOsPaths([dir(), target]));
+    //   }
+    // }
   };
 
   const createWindow = () => {

@@ -4,13 +4,13 @@ import type { Component } from "solid-js";
 import { createDraggable } from "@neodrag/solid";
 import { convertFileSrc } from "@tauri-apps/api/tauri";
 
-import { cn } from "~/lib/utils";
-import { useFilePath } from "~/store";
+import { cn, isEmpty, isNotEmpty } from "~/lib/utils";
+import { useAppState } from "~/store";
 
 import type { Property } from "csstype";
 
 const Viewer: Component = () => {
-  const { filePath } = useFilePath();
+  const { appState } = useAppState();
   const [scale, setScale] = createSignal<number>(1.0);
   const [cursor, setCursor] = createSignal<Property.Cursor>("cursor-grab");
   const { draggable } = createDraggable();
@@ -45,7 +45,7 @@ const Viewer: Component = () => {
   return (
     <div class="flex h-screen w-screen pt-[28px] bg-black">
       <Switch>
-        <Match when={filePath() !== ""}>
+        <Match when={isNotEmpty(appState.getters.currentFilePath())}>
           <div
             ref={container}
             class={cn(
@@ -72,12 +72,12 @@ const Viewer: Component = () => {
                   "pointer-events": "none",
                   "object-fit": "contain",
                 }}
-                src={convertFileSrc(filePath())}
+                src={convertFileSrc(appState.getters.currentFilePath()!)}
               />
             </div>
           </div>
         </Match>
-        <Match when={filePath() === ""}>
+        <Match when={isEmpty(appState.getters.currentFilePath())}>
           <div class="h-full w-full flex justify-center items-center bg-gray-200">
             <svg
               xmlns="http://www.w3.org/2000/svg"
