@@ -43,20 +43,6 @@ const App: Component = () => {
     })
   );
 
-  // createEffect(
-  //   on(dir, () => {
-  //     if (isNotEmpty(filePath())) {
-  //       invokes
-  //         .getImagesInDir(filePath())
-  //         .then((files) => {
-  //           console.log(files);
-  //           setFiles(files);
-  //         })
-  //         .catch((e) => console.log(e));
-  //     }
-  //   })
-  // );
-
   return (
     <div class="overflow-hidden flex flex-col select-none">
       <TitleBar />

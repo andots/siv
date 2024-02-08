@@ -9,7 +9,6 @@ type AppState = {
   images: string[];
   currentIndex: number | undefined;
   currentFilePath: string | undefined;
-  currentFilename: string | undefined;
   currentDir: string | undefined;
 };
 
@@ -19,7 +18,6 @@ const initAppState = (): AppState => {
     images: [],
     currentIndex: undefined,
     currentFilePath: undefined,
-    currentFilename: undefined,
     currentDir: undefined,
   };
 };
@@ -41,19 +39,23 @@ const appState = createFluxStore(initAppState(), {
       setState(initAppState());
     },
     setTitle: (title: string) => {
-      setState("title", title);
-      appWindow.setTitle(title).catch(logError);
+      setState("title", title); // set title for TitleBar
+      appWindow.setTitle(title).catch(logError); // set title for tauri window
     },
     setDefaultTitle: async () => {
       const title = await invokes.getDefaultAppTitle();
-      await appWindow.setTitle(title); // set title for tauri window
-      setState("title", title);
+      appState.actions.setTitle(title);
     },
     setCurrentFilePath: async (path: string) => {
       setState("currentFilePath", path);
-      const filename = await getFileName(path);
-      setState("title", filename);
-      await appWindow.setTitle(filename);
+      const title = await getFileName(path);
+      appState.actions.setTitle(title);
+    },
+    nextImage: () => {
+      //
+    },
+    prevImage: () => {
+      //
     },
   }),
 });
