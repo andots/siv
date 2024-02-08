@@ -8,6 +8,6 @@ export const getDefaultAppTitle = async () => {
   return await invoke<string>("get_default_app_title");
 };
 
-export const getImagesInDir = async () => {
-  return await invoke<string[]>("get_images_in_dir", { path: "test" });
+export const getImagesInDir = async (path: string) => {
+  return await invoke<string[]>("get_images_in_dir", { path });
 };

@@ -50,3 +50,7 @@ export const getFileName = async (path: string) => {
 export const getDirName = async (path: string) => {
   return await dirname(path);
 };
+
+export const logError = (e: unknown) => {
+  console.error(e);
+};

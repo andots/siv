@@ -15,7 +15,7 @@ import { Button } from "~/components/ui/button";
 import { TITLEBAR_HEIGHT, TITLEBAR_HEIGHT_PX } from "~/constants";
 import * as invokes from "~/invokes";
 import { joinOsPaths } from "~/lib/utils";
-import { useDir, useFileName, useFilePath, useFiles, useTitle } from "~/store";
+import { useAppState, useDir, useFileName, useFilePath, useFiles } from "~/store";
 
 import type { IconTypes } from "solid-iconify";
 
@@ -34,12 +34,13 @@ const TitleBarButton: Component<Props> = (props) => {
 };
 
 const TitleBar: Component = () => {
-  const { title } = useTitle();
+  // const { title } = useTitle();
   const { files } = useFiles();
   const { dir } = useDir();
   const { fileName } = useFileName();
   const { setFilePath } = useFilePath();
   const [maximized, setMaximized] = createSignal<boolean>(false);
+  const { appState } = useAppState();
 
   const minimize = () => {
     appWindow.minimize().catch((e) => console.log(e));
@@ -106,7 +107,7 @@ const TitleBar: Component = () => {
             data-tauri-drag-region
             class="text-primary-foreground text-xs w-[calc(100vw-240px)] text-center overflow-hidden text-ellipsis text-nowrap"
           >
-            {title()}
+            {appState.getters.title()}
           </p>
         </div>
         <div class="w-[100px] flex justify-end">

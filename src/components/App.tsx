@@ -7,8 +7,8 @@ import { appWindow } from "@tauri-apps/api/window";
 import TitleBar from "~/components/TitleBar";
 import Viewer from "~/components/Viewer";
 import * as invokes from "~/invokes";
-import { getDirName, getFileName, getImagesInDirectory, isNotEmpty } from "~/lib/utils";
-import { useDir, useFileName, useFilePath, useFiles, useTitle } from "~/store";
+import { getDirName, getFileName, isNotEmpty, logError } from "~/lib/utils";
+import { useAppState, useDir, useFileName, useFilePath, useFiles, useTitle } from "~/store";
 
 const App: Component = () => {
   const { dir, setDir } = useDir();
@@ -16,12 +16,16 @@ const App: Component = () => {
   const { setFiles } = useFiles();
   const { filePath, setFilePath } = useFilePath();
   const { setFileName } = useFileName();
+  const { appState } = useAppState();
+
+  onMount(() => {
+    appState.actions.setDefaultTitle().catch(logError);
+  });
 
   onMount(() => {
     invokes
       .getDefaultAppTitle()
       .then((title) => setTitle(title))
-      .then((title) => appWindow.setTitle(title))
       .catch((e) => console.log(e));
   });
 
@@ -49,8 +53,12 @@ const App: Component = () => {
   createEffect(
     on(dir, () => {
       if (isNotEmpty(filePath())) {
-        getImagesInDirectory(filePath())
-          .then((files) => setFiles(files))
+        invokes
+          .getImagesInDir(filePath())
+          .then((files) => {
+            console.log(files);
+            setFiles(files);
+          })
           .catch((e) => console.log(e));
       }
     })

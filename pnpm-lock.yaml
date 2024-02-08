@@ -23,6 +23,9 @@ dependencies:
   '@solid-primitives/event-listener':
     specifier: ^2.3.1
     version: 2.3.1(solid-js@1.8.12)
+  '@solid-primitives/flux-store':
+    specifier: ^0.0.3
+    version: 0.0.3(solid-js@1.8.12)
   '@tauri-apps/api':
     specifier: ^1.5.3
     version: 1.5.3
@@ -1363,6 +1366,14 @@ packages:
       solid-js: ^1.6.12
     dependencies:
       '@solid-primitives/utils': 6.2.2(solid-js@1.8.12)
+      solid-js: 1.8.12
+    dev: false
+
+  /@solid-primitives/flux-store@0.0.3(solid-js@1.8.12):
+    resolution: {integrity: sha512-HzsQ2p8HIaoAGea85CHrehor4FaHaJGPl84inrZBJQPmWoBxPCUK7Jj+MP4CO+9qtyul0STz9O95JrhjWUJKbw==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
       solid-js: 1.8.12
     dev: false
 
