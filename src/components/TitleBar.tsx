@@ -50,31 +50,11 @@ const TitleBar: Component = () => {
   };
 
   const next = () => {
-    // const currentIndex = files().findIndex((v) => v === fileName());
-    // if (currentIndex != -1) {
-    //   if (currentIndex == files().length - 1) {
-    //     // current is end of array, so go to the start of array
-    //     const target = files().at(0);
-    //     if (target) setFilePath(joinOsPaths([dir(), target]));
-    //   } else {
-    //     const target = files().at(currentIndex + 1);
-    //     if (target) setFilePath(joinOsPaths([dir(), target]));
-    //   }
-    // }
+    appState.actions.nextImage();
   };
 
   const prev = () => {
-    // const currentIndex = files().findIndex((v) => v === fileName());
-    // if (currentIndex != -1) {
-    //   if (currentIndex == 0) {
-    //     // current is start is array, so go to the end of array
-    //     const target = files().at(files().length - 1);
-    //     if (target) setFilePath(joinOsPaths([dir(), target]));
-    //   } else {
-    //     const target = files().at(currentIndex - 1);
-    //     if (target) setFilePath(joinOsPaths([dir(), target]));
-    //   }
-    // }
+    appState.actions.prevImage();
   };
 
   const createWindow = () => {
