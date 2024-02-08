@@ -42,6 +42,7 @@ fn is_image(entry: &DirEntry) -> bool {
             || ext.eq_ignore_ascii_case("svg")
             || ext.eq_ignore_ascii_case("gif")
             || ext.eq_ignore_ascii_case("avif")
+            || ext.eq_ignore_ascii_case("apng")
             || ext.eq_ignore_ascii_case("jpe")
             || ext.eq_ignore_ascii_case("jif")
             || ext.eq_ignore_ascii_case("jfif")
@@ -97,5 +98,19 @@ mod tests {
             get_images_in_dir(assets_dir.to_string_lossy().to_string());
         assert!(result.is_ok());
         println!("{:?}", result);
+        assert_eq!(result.ok().unwrap().len(), 3);
+    }
+
+    #[test]
+    fn test_get_images_in_dir_with_filepath() {
+        let file_path = env::current_dir()
+            .unwrap()
+            .join("test_assets")
+            .join("animation.gif");
+        let result: Result<Vec<String>, String> =
+            get_images_in_dir(file_path.to_string_lossy().to_string());
+        assert!(result.is_ok());
+        println!("{:?}", result);
+        assert_eq!(result.ok().unwrap().len(), 3);
     }
 }
