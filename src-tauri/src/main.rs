@@ -22,7 +22,8 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             commands::create_window,
-            commands::get_default_app_title
+            commands::get_default_app_title,
+            commands::get_images_in_dir
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

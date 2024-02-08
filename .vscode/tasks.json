@@ -47,7 +47,7 @@
       "label": "Tauri Dev with image",
       "detail": "pnpm tauri dev -- -- -- image_path",
       "type": "shell",
-      "command": "pnpm tauri dev -- -- -- %cd%\\public\\Vincent_Willem_van_Gogh_113.jpg",
+      "command": "pnpm tauri dev -- -- -- %cd%\\src-tauri\\test_assets\\Vincent_Willem_van_Gogh_113.jpg",
       "problemMatcher": []
     },
     {

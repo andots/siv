@@ -2783,6 +2783,7 @@ dependencies = [
  "serde_json",
  "tauri",
  "tauri-build",
+ "walkdir",
  "window-shadows",
 ]
 
