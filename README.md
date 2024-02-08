@@ -16,18 +16,22 @@ SIV is a simple image viewer made with Tauri and SolidJS.
 - [x] Move position of image by dragging in window.
 - [x] Traversing images in folder.
 - [x] Supports file formats: `png`, `jpg`, `jpeg`, `webp`, `svg`, `gif`, `avif`, `jpe`, `jif`, `jfif`
-- [ ] Keyboard shortcuts.
+- [x] Keyboard shortcuts.
 - [ ] Tile windows.
 
 ## ⌨️ Shortcuts
 
-| Commands            | Functions                        |
-| ------------------- | -------------------------------- |
-| + / -               | Zoom in/out                      |
-| ArrowRight, >, j, n | Show next image in directory     |
-| ArrowLeft, <, k, p  | Show previous image in directory |
-| o                   | Open new window                  |
-| t                   | Title windows                    |
+| Commands           | Functions                   |
+| ------------------ | --------------------------- |
+| + , z              | Zoom in                     |
+| - , x              | Zoom out                    |
+| ArrowRight , > , n | Next image in directory     |
+| ArrowLeft , < , p  | Previous image in directory |
+| j                  | Move down image position    |
+| k                  | Move up image position      |
+| l                  | Move right image position   |
+| h                  | Move left image position    |
+| o                  | Open new window             |
 
 ## ⛏️ Development
 

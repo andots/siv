@@ -14,6 +14,7 @@ import {
 import { Button } from "~/components/ui/button";
 import { TITLEBAR_HEIGHT, TITLEBAR_HEIGHT_PX } from "~/constants";
 import * as invokes from "~/invokes";
+import { logError } from "~/lib/utils";
 import { useAppState } from "~/store";
 
 import type { IconTypes } from "solid-iconify";
@@ -58,7 +59,7 @@ const TitleBar: Component = () => {
   };
 
   const createWindow = () => {
-    invokes.createWindow(`w-${Date.now()}`, "index.html").catch((e) => console.log(e));
+    invokes.createWindow(`w-${Date.now()}`, "index.html").catch(logError);
   };
 
   return (

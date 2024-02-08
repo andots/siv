@@ -5,7 +5,9 @@ import { createDraggable } from "@neodrag/solid";
 import { makeEventListener } from "@solid-primitives/event-listener";
 import { convertFileSrc } from "@tauri-apps/api/tauri";
 
-import { cn } from "~/lib/utils";
+import * as invokes from "~/invokes";
+import { cn, logError } from "~/lib/utils";
+import { useAppState } from "~/store";
 
 import type { Property } from "csstype";
 
@@ -14,6 +16,7 @@ type Props = {
 };
 
 const Viewer: Component<Props> = (props) => {
+  const { appState } = useAppState();
   const [scale, setScale] = createSignal<number>(1.0);
   const [cursor, setCursor] = createSignal<Property.Cursor>("cursor-grab");
 
@@ -26,8 +29,38 @@ const Viewer: Component<Props> = (props) => {
   onMount(() => {
     if (containerRef != null) {
       makeEventListener(containerRef, "wheel", handleMouseWheel, { passive: true });
+      makeEventListener(window, "keydown", handleKeyDown);
     }
   });
+
+  const handleKeyDown = (e: KeyboardEvent): void => {
+    e.preventDefault();
+    if (e.key === "+" || e.key === "z" || e.key === "f") {
+      const newScale = Math.min(Math.max(0.5, scale() + 0.1), 4);
+      setScale(newScale);
+    } else if (e.key === "-" || e.key === "x" || e.key === "d") {
+      const newScale = Math.min(Math.max(0.5, scale() - 0.1), 4);
+      setScale(newScale);
+    } else if (e.key === "ArrowRight" || e.key === ">" || e.key === "n") {
+      appState.actions.nextImage();
+    } else if (e.key === "ArrowLeft" || e.key === "<" || e.key === "p") {
+      appState.actions.prevImage();
+    } else if (e.key === "j") {
+      // pos go down
+      setPosition({ x: position().x, y: position().y + 10 });
+    } else if (e.key === "k") {
+      // pos go up
+      setPosition({ x: position().x, y: position().y - 10 });
+    } else if (e.key === "h") {
+      // pos go left
+      setPosition({ x: position().x - 10, y: position().y });
+    } else if (e.key === "l") {
+      // pos go right
+      setPosition({ x: position().x + 10, y: position().y });
+    } else if (e.key === "o") {
+      invokes.createWindow(`w-${Date.now()}`, "index.html").catch(logError);
+    }
+  };
 
   const handleMouseWheel = (e: WheelEvent) => {
     // scroll up is zoom to 10%, down to -10%
