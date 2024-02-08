@@ -1,4 +1,4 @@
-import { createEffect, on, onMount, type Component } from "solid-js";
+import { onMount, type Component } from "solid-js";
 
 import { getMatches } from "@tauri-apps/api/cli";
 import { TauriEvent, type Event } from "@tauri-apps/api/event";
@@ -36,12 +36,6 @@ const App: Component = () => {
       })
       .catch(logError);
   });
-
-  createEffect(
-    on(appState.getters.currentFilePath, () => {
-      // console.log(appState.getters.currentFilePath());
-    })
-  );
 
   return (
     <div class="overflow-hidden flex flex-col select-none">
