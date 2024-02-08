@@ -1,12 +1,13 @@
-import { onMount, type Component } from "solid-js";
+import { onMount, type Component, Show } from "solid-js";
 
 import { getMatches } from "@tauri-apps/api/cli";
 import { TauriEvent, type Event } from "@tauri-apps/api/event";
 import { appWindow } from "@tauri-apps/api/window";
 
+import DropArea from "~/components/DropArea";
 import TitleBar from "~/components/TitleBar";
 import Viewer from "~/components/Viewer";
-import { logError } from "~/lib/utils";
+import { isEmpty, isNotEmpty, logError } from "~/lib/utils";
 import { useAppState } from "~/store";
 
 const App: Component = () => {
@@ -40,7 +41,12 @@ const App: Component = () => {
   return (
     <div class="overflow-hidden flex flex-col select-none">
       <TitleBar />
-      <Viewer />
+      <Show when={isNotEmpty(appState.getters.currentFilePath())}>
+        <Viewer src={appState.getters.currentFilePath()!} />
+      </Show>
+      <Show when={isEmpty(appState.getters.currentFilePath())}>
+        <DropArea />
+      </Show>
     </div>
   );
 };

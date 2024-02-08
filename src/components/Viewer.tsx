@@ -1,16 +1,18 @@
-import { createSignal, Switch, Match } from "solid-js";
+import { createSignal } from "solid-js";
 import type { Component } from "solid-js";
 
 import { createDraggable } from "@neodrag/solid";
 import { convertFileSrc } from "@tauri-apps/api/tauri";
 
-import { cn, isEmpty, isNotEmpty } from "~/lib/utils";
-import { useAppState } from "~/store";
+import { cn } from "~/lib/utils";
 
 import type { Property } from "csstype";
 
-const Viewer: Component = () => {
-  const { appState } = useAppState();
+type Props = {
+  src: string;
+};
+
+const Viewer: Component<Props> = (props) => {
   const [scale, setScale] = createSignal<number>(1.0);
   const [cursor, setCursor] = createSignal<Property.Cursor>("cursor-grab");
   const { draggable } = createDraggable();
@@ -44,59 +46,33 @@ const Viewer: Component = () => {
 
   return (
     <div class="flex h-screen w-screen pt-[28px] bg-black">
-      <Switch>
-        <Match when={isNotEmpty(appState.getters.currentFilePath())}>
-          <div
-            ref={container}
-            class={cn(
-              "h-full w-full overflow-hidden flex justify-center items-center bg-black",
-              cursor()
-            )}
-            onWheel={(e) => handleMouseWheel(e)}
-            onMouseDown={() => setCursor("cursor-grabbing")}
-            onMouseUp={() => setCursor("cursor-grab")}
-          >
-            <div
-              use:draggable={{
-                axis: "both",
-                position: position(),
-                onDrag: ({ offsetX, offsetY }) => setPosition({ x: offsetX, y: offsetY }),
-              }}
-            >
-              <img
-                ref={image}
-                onLoad={() => onLoadImage()}
-                style={{
-                  transform: `scale(${scale()})`,
-                  "user-select": "none",
-                  "pointer-events": "none",
-                  "object-fit": "contain",
-                }}
-                src={convertFileSrc(appState.getters.currentFilePath()!)}
-              />
-            </div>
-          </div>
-        </Match>
-        <Match when={isEmpty(appState.getters.currentFilePath())}>
-          <div class="h-full w-full flex justify-center items-center bg-gray-200">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-20 h-20"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-              />
-            </svg>
-            <span class="font-bold text-xl pl-4">Drag & Drop Image Here.</span>
-          </div>
-        </Match>
-      </Switch>
+      <div
+        ref={container}
+        class={cn("h-full w-full overflow-hidden flex justify-center items-center", cursor())}
+        onWheel={(e) => handleMouseWheel(e)}
+        onMouseDown={() => setCursor("cursor-grabbing")}
+        onMouseUp={() => setCursor("cursor-grab")}
+      >
+        <div
+          use:draggable={{
+            axis: "both",
+            position: position(),
+            onDrag: ({ offsetX, offsetY }) => setPosition({ x: offsetX, y: offsetY }),
+          }}
+        >
+          <img
+            ref={image}
+            onLoad={() => onLoadImage()}
+            style={{
+              transform: `scale(${scale()})`,
+              "user-select": "none",
+              "pointer-events": "none",
+              "object-fit": "contain",
+            }}
+            src={convertFileSrc(props.src)}
+          />
+        </div>
+      </div>
     </div>
   );
 };
