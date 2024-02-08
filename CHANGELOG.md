@@ -1,5 +1,26 @@
 # Changelog
 
+# [0.9.0](https://github.com/andots/siv/compare/v0.8.1...v0.9.0) (2024-02-08)
+
+
+### Bug Fixes
+
+* add apng for listing images ([70b834a](https://github.com/andots/siv/commit/70b834a7b8d8f4ceaee1cfe7357249751d3aef24))
+* add select-none to the App div ([7320668](https://github.com/andots/siv/commit/73206686d88c7db077f886cebd6d8254d26177ee))
+* open devtools in create_window ([1fe97ee](https://github.com/andots/siv/commit/1fe97ee54c2ab7084fea65d6260e9f067f1d3fdb))
+* wheel event must be passive: true ([becdf6e](https://github.com/andots/siv/commit/becdf6e41dcf0e744c4022e804c0507c2c67ab41))
+
+
+### Features
+
+* keyboard shortcuts ([db74aa9](https://github.com/andots/siv/commit/db74aa9bf5f2826bdf22c38b038ec7600170ed0b))
+* traverse next/prev image with new state management logic ([f2ec22d](https://github.com/andots/siv/commit/f2ec22d84c8ebadd45ef80a49c6de9fcfe58217b))
+
+
+### Performance Improvements
+
+* get images in Rust side ([088a075](https://github.com/andots/siv/commit/088a075928c45f5e9ca7f709d80b496b5ed48c84))
+
 ## [0.8.1](https://github.com/andots/siv/compare/v0.8.0...v0.8.1) (2024-02-06)
 
 
