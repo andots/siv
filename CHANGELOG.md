@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.10.1](https://github.com/andots/siv/compare/v0.10.0...v0.10.1) (2024-02-09)
+
+
+### Bug Fixes
+
+* arrow keys for moving image's position ([21a15fb](https://github.com/andots/siv/commit/21a15fbec01d7a915f3c9508007329d64e383f87))
+* update App icon ([1bae8f2](https://github.com/andots/siv/commit/1bae8f21f7f7f9aa5caf5a866051185e7947ac0d))
+
 # [0.10.0](https://github.com/andots/siv/compare/v0.9.0...v0.10.0) (2024-02-09)
 
 

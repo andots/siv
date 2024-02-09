@@ -3023,7 +3023,7 @@ checksum = "38b58827f4464d87d377d175e90bf58eb00fd8716ff0a62f80356b5e61555d0d"
 
 [[package]]
 name = "siv"
-version = "0.10.0"
+version = "0.10.1"
 dependencies = [
  "log",
  "serde",
