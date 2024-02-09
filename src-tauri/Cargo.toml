@@ -20,8 +20,6 @@ tauri = { version = "1.5.4", features = [
   "process-exit",
   "global-shortcut-all",
   "updater",
-  "fs-exists",
-  "fs-read-dir",
   "window-start-dragging",
   "window-create",
   "window-close",

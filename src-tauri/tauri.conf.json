@@ -56,19 +56,6 @@
         "relaunch": true,
         "relaunchDangerousAllowSymlinkMacos": false
       },
-      "fs": {
-        "all": false,
-        "exists": true,
-        "scope": ["**"],
-        "readDir": true,
-        "copyFile": false,
-        "createDir": false,
-        "readFile": false,
-        "removeDir": false,
-        "removeFile": false,
-        "renameFile": false,
-        "writeFile": false
-      },
       "window": {
         "all": false,
         "center": false,
