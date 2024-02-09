@@ -46,3 +46,7 @@ pnpm tauri build
 # release
 pnpm release
 ```
+
+## 🔗 Links
+
+App Icon: <https://www.iconfinder.com/icons/9075826/photo_gallery_frame_picture_image_wall_icon>
