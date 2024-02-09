@@ -43,14 +43,3 @@ pnpm tauri build
 # release
 pnpm release
 ```
-
-<style>
-img
-{
-    display:block;
-    float:none;
-    margin-left:auto;
-    margin-right:auto;
-    width:80%;
-}
-</style>
