@@ -3,7 +3,6 @@ import { register, unregisterAll } from "@tauri-apps/api/globalShortcut";
 import { exit } from "@tauri-apps/api/process";
 import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
 import { attachConsole } from "tauri-plugin-log-api";
-import { ulid } from "ulidx";
 
 import * as invokes from "~/invokes";
 import { logDebug, logError, logInfo } from "~/lib/utils";
@@ -37,7 +36,7 @@ export const initApp = async () => {
 
   // Control + O - Open new window
   await register("CommandOrControl+O", () => {
-    invokes.createWindow(`w-${ulid()}`, "index.html").catch(logError);
+    invokes.createNewWindow();
   }).catch(logError);
 
   // Control + T - Tile windows
