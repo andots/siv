@@ -55,7 +55,6 @@ const appState = createFluxStore(initAppState(), {
     setCurrentDir: async (path: string) => {
       const dir = await getDirName(path);
       if (state.currentDir !== dir) {
-        console.log("invokes.getImagesInDir!!!");
         setState("currentDir", dir);
         const images = await invokes.getImagesInDir(dir);
         setState("images", images);

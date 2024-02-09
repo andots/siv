@@ -38,16 +38,16 @@ const TitleBar: Component = () => {
   const [maximized, setMaximized] = createSignal<boolean>(false);
 
   const minimize = () => {
-    appWindow.minimize().catch((e) => console.log(e));
+    appWindow.minimize().catch(logError);
   };
 
   const toggleMaximize = () => {
     setMaximized(!maximized());
-    appWindow.toggleMaximize().catch((e) => console.log(e));
+    appWindow.toggleMaximize().catch(logError);
   };
 
   const close = () => {
-    appWindow.close().catch((e) => console.log(e));
+    appWindow.close().catch(logError);
   };
 
   const next = () => {
