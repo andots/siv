@@ -1,6 +1,5 @@
 import { onMount, type Component, Show } from "solid-js";
 
-import { getMatches } from "@tauri-apps/api/cli";
 import { TauriEvent, type Event } from "@tauri-apps/api/event";
 import { appWindow } from "@tauri-apps/api/window";
 
@@ -21,17 +20,6 @@ const App: Component = () => {
       .listen(TauriEvent.WINDOW_FILE_DROP, (event: Event<TauriEvent.WINDOW_FILE_DROP>) => {
         if (event.payload.length == 1) {
           appState.actions.setCurrentFilePath(event.payload[0]).catch(logError);
-        }
-      })
-      .catch(logError);
-  });
-
-  onMount(() => {
-    getMatches()
-      .then((matches) => {
-        const match = matches.args["file"];
-        if (match != null && match.occurrences == 1 && typeof match.value === "string") {
-          appState.actions.setCurrentFilePath(match.value).catch(logError);
         }
       })
       .catch(logError);

@@ -1,3 +1,4 @@
+import { getMatches } from "@tauri-apps/api/cli";
 import { register, unregisterAll } from "@tauri-apps/api/globalShortcut";
 import { exit } from "@tauri-apps/api/process";
 import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
@@ -34,4 +35,16 @@ export const initApp = async () => {
 
   // ! Set default title
   await appState.actions.setDefaultTitle().catch(logError);
+
+  // ! Load image with getMatches if window is main
+  if (appWindow.label === "main") {
+    await getMatches()
+      .then((matches) => {
+        const match = matches.args["file"];
+        if (match != null && match.occurrences == 1 && typeof match.value === "string") {
+          appState.actions.setCurrentFilePath(match.value).catch(logError);
+        }
+      })
+      .catch(logError);
+  }
 };
