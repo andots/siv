@@ -1,6 +1,7 @@
 import { basename, dirname, sep } from "@tauri-apps/api/path";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { debug, error, info, trace, warn } from "tauri-plugin-log-api";
 
 import type { ClassValue } from "clsx";
 
@@ -28,6 +29,22 @@ export const getDirName = async (path: string) => {
   return await dirname(path);
 };
 
-export const logError = (e: unknown) => {
-  console.error(e);
+export const logError = (e: string) => {
+  error(e).catch(() => {});
+};
+
+export const logDebug = (e: string) => {
+  debug(e).catch(() => {});
+};
+
+export const logWarn = (e: string) => {
+  warn(e).catch(() => {});
+};
+
+export const logInfo = (e: string) => {
+  info(e).catch(() => {});
+};
+
+export const logTrace = (e: string) => {
+  trace(e).catch(() => {});
 };
