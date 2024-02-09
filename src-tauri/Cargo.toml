@@ -36,6 +36,10 @@ tauri = { version = "1.5.4", features = [
   "cli",
 ] }
 window-shadows = { git = "https://github.com/tauri-apps/window-shadows.git" }
+tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1", features = [
+  "colored",
+] }
+log = "^0.4"
 walkdir = "2"
 
 [features]

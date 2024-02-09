@@ -9,8 +9,11 @@ import { appWindow } from "@tauri-apps/api/window";
 import DropArea from "~/components/DropArea";
 import TitleBar from "~/components/TitleBar";
 import Viewer from "~/components/Viewer";
+import { initApp } from "~/init";
 import { isEmpty, isNotEmpty, logError } from "~/lib/utils";
 import { useAppState } from "~/store";
+
+await initApp();
 
 const App: Component = () => {
   const { appState } = useAppState();

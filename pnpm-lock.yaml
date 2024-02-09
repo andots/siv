@@ -56,6 +56,9 @@ dependencies:
   tailwindcss-animate:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.4.1)
+  tauri-plugin-log-api:
+    specifier: github:tauri-apps/tauri-plugin-log#v1
+    version: github.com/tauri-apps/tauri-plugin-log/19f5dcc0425e9127d2c591780e5047b83e77a7c2
   typescript:
     specifier: ^5.3.3
     version: 5.3.3
@@ -8092,4 +8095,12 @@ packages:
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
+    dev: false
+
+  github.com/tauri-apps/tauri-plugin-log/19f5dcc0425e9127d2c591780e5047b83e77a7c2:
+    resolution: {tarball: https://codeload.github.com/tauri-apps/tauri-plugin-log/tar.gz/19f5dcc0425e9127d2c591780e5047b83e77a7c2}
+    name: tauri-plugin-log-api
+    version: 0.0.0
+    dependencies:
+      '@tauri-apps/api': 1.5.3
     dev: false
