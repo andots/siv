@@ -2,8 +2,6 @@ import { onMount, type Component, Show } from "solid-js";
 
 import { getMatches } from "@tauri-apps/api/cli";
 import { TauriEvent, type Event } from "@tauri-apps/api/event";
-import { register, unregisterAll } from "@tauri-apps/api/globalShortcut";
-import { exit } from "@tauri-apps/api/process";
 import { appWindow } from "@tauri-apps/api/window";
 
 import DropArea from "~/components/DropArea";
@@ -17,19 +15,6 @@ await initApp();
 
 const App: Component = () => {
   const { appState } = useAppState();
-
-  onMount(() => {
-    unregisterAll().catch(logError);
-    // Control+Q terminate process
-    register("CommandOrControl+Q", () => {
-      exit(0).catch(logError);
-    }).catch(logError);
-
-    // Control+W close window
-    register("CommandOrControl+W", () => {
-      appWindow.close().catch(logError);
-    }).catch(logError);
-  });
 
   onMount(() => {
     appState.actions.setDefaultTitle().catch(logError);
