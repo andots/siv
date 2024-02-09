@@ -47,6 +47,15 @@
       "path": {
         "all": true
       },
+      "globalShortcut": {
+        "all": true
+      },
+      "process": {
+        "all": false,
+        "exit": true,
+        "relaunch": true,
+        "relaunchDangerousAllowSymlinkMacos": false
+      },
       "fs": {
         "all": false,
         "exists": true,
