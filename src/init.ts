@@ -3,7 +3,9 @@ import { register, unregisterAll } from "@tauri-apps/api/globalShortcut";
 import { exit } from "@tauri-apps/api/process";
 import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
 import { attachConsole } from "tauri-plugin-log-api";
+import { ulid } from "ulidx";
 
+import * as invokes from "~/invokes";
 import { logDebug, logError, logInfo } from "~/lib/utils";
 import { useAppState } from "~/store";
 
@@ -19,12 +21,12 @@ export const initApp = async () => {
   logDebug("Register Global shortcuts");
   await unregisterAll().catch(logError);
 
-  // Control+Q terminate process
+  // Control+Q - Terminate process
   await register("CommandOrControl+Q", () => {
     exit(0).catch(logError);
   }).catch(logError);
 
-  // Control+W close window
+  // Control+W - Close window
   await register("CommandOrControl+W", () => {
     WebviewWindow.getFocusedWindow()
       .then((window) => {
@@ -33,10 +35,20 @@ export const initApp = async () => {
       .catch(logError);
   }).catch(logError);
 
-  // ! Set default title
+  // Control + O - Open new window
+  await register("CommandOrControl+O", () => {
+    invokes.createWindow(`w-${ulid()}`, "index.html").catch(logError);
+  }).catch(logError);
+
+  // Control + T - Tile windows
+  await register("CommandOrControl+T", () => {
+    // TODO
+  }).catch(logError);
+
+  // Set default title
   await appState.actions.setDefaultTitle().catch(logError);
 
-  // ! Load image with getMatches if window is main
+  // Load image with getMatches if window is main
   if (appWindow.label === "main") {
     await getMatches()
       .then((matches) => {
