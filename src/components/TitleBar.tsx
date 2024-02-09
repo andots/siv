@@ -10,6 +10,7 @@ import {
   CodiconChromeRestore,
   CodiconEmptyWindow,
 } from "solid-iconify/codicon";
+import { ulid } from "ulidx";
 
 import { Button } from "~/components/ui/button";
 import { TITLEBAR_HEIGHT, TITLEBAR_HEIGHT_PX } from "~/constants";
@@ -59,7 +60,7 @@ const TitleBar: Component = () => {
   };
 
   const createWindow = () => {
-    invokes.createWindow(`w-${Date.now()}`, "index.html").catch(logError);
+    invokes.createWindow(`w-${ulid()}`, "index.html").catch(logError);
   };
 
   return (

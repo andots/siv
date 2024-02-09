@@ -4,6 +4,7 @@ import type { Component } from "solid-js";
 import { createDraggable } from "@neodrag/solid";
 import { makeEventListener } from "@solid-primitives/event-listener";
 import { convertFileSrc } from "@tauri-apps/api/tauri";
+import { ulid } from "ulidx";
 
 import * as invokes from "~/invokes";
 import { cn, logError } from "~/lib/utils";
@@ -58,7 +59,7 @@ const Viewer: Component<Props> = (props) => {
       // pos go right
       setPosition({ x: position().x + 10, y: position().y });
     } else if (e.key === "o") {
-      invokes.createWindow(`w-${Date.now()}`, "index.html").catch(logError);
+      invokes.createWindow(`w-${ulid()}`, "index.html").catch(logError);
     }
   };
 
