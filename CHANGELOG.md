@@ -1,5 +1,25 @@
 # Changelog
 
+# [0.10.0](https://github.com/andots/siv/compare/v0.9.0...v0.10.0) (2024-02-09)
+
+
+### Bug Fixes
+
+* don't need to open devtools for new window thanks to log plugin ([ba3726f](https://github.com/andots/siv/commit/ba3726fbe3792213b80d5a241ef884b6f6840003))
+* load image with getMatches in initApp and check window is main or not ([81cd472](https://github.com/andots/siv/commit/81cd47244db7a99ec243e9cc937dec86744951c7))
+* open window by Control+O ([ef9ce63](https://github.com/andots/siv/commit/ef9ce637908ba6ddd21a169a1f1de7b86b75db72))
+* register shorcuts in initApp ([3c44427](https://github.com/andots/siv/commit/3c44427cf0492b59ab5d01e3f505362ba109fad1))
+* remove console.log ([76dd8a9](https://github.com/andots/siv/commit/76dd8a954bfef26e8030732556c5f1ef787c8a06))
+* use WebviewWindow.getFocusedWindow() to close window with shortcut ([d5bfe03](https://github.com/andots/siv/commit/d5bfe03cf1d70cc141b71a9c127e5d35c8932d49))
+
+
+### Features
+
+* create window label with ulidx ([fe6523b](https://github.com/andots/siv/commit/fe6523b73e575299f0a673ad259370deac7667d9))
+* logging with tauri-plugin-log ([3d89d15](https://github.com/andots/siv/commit/3d89d151526c5bd9f4478f70c03a3d94d3f4abd2))
+* register global shortcuts ([d9b4acb](https://github.com/andots/siv/commit/d9b4acb58d56a5d9710514dc12f5bf993b8d1c7f))
+* show logs with each level ([925a33e](https://github.com/andots/siv/commit/925a33ec24bcc87dac3713cb0f944fdbe67a734c))
+
 # [0.9.0](https://github.com/andots/siv/compare/v0.8.1...v0.9.0) (2024-02-08)
 
 
