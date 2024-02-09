@@ -17,10 +17,6 @@ const App: Component = () => {
   const { appState } = useAppState();
 
   onMount(() => {
-    appState.actions.setDefaultTitle().catch(logError);
-  });
-
-  onMount(() => {
     appWindow
       .listen(TauriEvent.WINDOW_FILE_DROP, (event: Event<TauriEvent.WINDOW_FILE_DROP>) => {
         if (event.payload.length == 1) {
