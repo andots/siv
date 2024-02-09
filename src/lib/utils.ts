@@ -1,4 +1,5 @@
 import { basename, dirname, sep } from "@tauri-apps/api/path";
+import { appWindow } from "@tauri-apps/api/window";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { debug, error, info, trace, warn } from "tauri-plugin-log-api";
@@ -30,21 +31,21 @@ export const getDirName = async (path: string) => {
 };
 
 export const logError = (e: string) => {
-  error(e).catch(() => {});
+  error(`${appWindow.label}: ${e}`).catch(() => {});
 };
 
 export const logDebug = (e: string) => {
-  debug(e).catch(() => {});
+  debug(`${appWindow.label}: ${e}`).catch(() => {});
 };
 
 export const logWarn = (e: string) => {
-  warn(e).catch(() => {});
+  warn(`${appWindow.label}: ${e}`).catch(() => {});
 };
 
 export const logInfo = (e: string) => {
-  info(e).catch(() => {});
+  info(`${appWindow.label}: ${e}`).catch(() => {});
 };
 
 export const logTrace = (e: string) => {
-  trace(e).catch(() => {});
+  trace(`${appWindow.label}: ${e}`).catch(() => {});
 };

@@ -16,7 +16,7 @@ export const initApp = async () => {
 
   logInfo("initApp");
 
-  logDebug(`Register Global shortcuts: ${appWindow.label}`);
+  logDebug("Register Global shortcuts");
   await unregisterAll().catch(logError);
 
   // Control+Q terminate process
