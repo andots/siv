@@ -40,20 +40,20 @@ const Viewer: Component<Props> = (props) => {
     } else if (e.key === "-" || e.key === "x" || e.key === "d") {
       const newScale = Math.min(Math.max(0.5, scale() - 0.1), 4);
       setScale(newScale);
-    } else if (e.key === "ArrowRight" || e.key === ">" || e.key === "n") {
+    } else if (e.key === ">" || e.key === "n") {
       appState.actions.nextImage();
-    } else if (e.key === "ArrowLeft" || e.key === "<" || e.key === "p") {
+    } else if (e.key === "<" || e.key === "p") {
       appState.actions.prevImage();
-    } else if (e.key === "j") {
+    } else if (e.key === "ArrowDown" || e.key === "j") {
       // pos go down
       setPosition({ x: position().x, y: position().y + 10 });
-    } else if (e.key === "k") {
+    } else if (e.key === "ArrowUp" || e.key === "k") {
       // pos go up
       setPosition({ x: position().x, y: position().y - 10 });
-    } else if (e.key === "h") {
+    } else if (e.key === "ArrowLeft" || e.key === "h") {
       // pos go left
       setPosition({ x: position().x - 10, y: position().y });
-    } else if (e.key === "l") {
+    } else if (e.key === "ArrowRight" || e.key === "l") {
       // pos go right
       setPosition({ x: position().x + 10, y: position().y });
     }
