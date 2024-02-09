@@ -1,6 +1,6 @@
 import { register, unregisterAll } from "@tauri-apps/api/globalShortcut";
 import { exit } from "@tauri-apps/api/process";
-import { appWindow, getCurrent } from "@tauri-apps/api/window";
+import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
 import { attachConsole } from "tauri-plugin-log-api";
 
 import { logDebug, logError, logInfo } from "~/lib/utils";
@@ -16,19 +16,22 @@ export const initApp = async () => {
   logInfo("initApp");
 
   logDebug(`Register Global shortcuts: ${appWindow.label}`);
-  unregisterAll().catch(logError);
+  await unregisterAll().catch(logError);
 
   // Control+Q terminate process
-  register("CommandOrControl+Q", () => {
+  await register("CommandOrControl+Q", () => {
     exit(0).catch(logError);
   }).catch(logError);
 
   // Control+W close window
-  register("CommandOrControl+W", () => {
-    getCurrent().close().catch(logError);
-    // appWindow.close().catch(logError);
+  await register("CommandOrControl+W", () => {
+    WebviewWindow.getFocusedWindow()
+      .then((window) => {
+        if (window) window.close().catch(logError);
+      })
+      .catch(logError);
   }).catch(logError);
 
   // ! Set default title
-  appState.actions.setDefaultTitle().catch(logError);
+  await appState.actions.setDefaultTitle().catch(logError);
 };
