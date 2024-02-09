@@ -69,7 +69,11 @@ const Viewer: Component<Props> = (props) => {
 
   const onLoadImage = () => {
     if (containerRef && imageRef) {
-      imageRef.style.height = `${containerRef.clientHeight}px`;
+      // If the image original height is larger than container,
+      // set image height to container height
+      if (imageRef.naturalHeight > containerRef.clientHeight) {
+        imageRef.style.height = `${containerRef.clientHeight}px`;
+      }
       // reset scale and position
       setScale(1.0);
       setPosition({ x: 0, y: 0 });
