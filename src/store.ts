@@ -56,6 +56,7 @@ const appState = createFluxStore(initAppState(), {
       if (state.currentDir !== dir) {
         setState("currentDir", dir);
         const images = await invokes.getImagesInDir(dir);
+        console.log(images);
         setState("images", images);
         const index = images.findIndex((a) => a === path);
         if (index != -1) {
@@ -64,7 +65,7 @@ const appState = createFluxStore(initAppState(), {
       }
     },
     nextImage: () => {
-      if (state.images.length > 0) {
+      if (state.images.length > 1) {
         if (state.currentIndex == state.images.length - 1) {
           // go to 0 because the current is the end of array
           setState("currentIndex", 0);
@@ -75,7 +76,7 @@ const appState = createFluxStore(initAppState(), {
       }
     },
     prevImage: () => {
-      if (state.images.length > 0) {
+      if (state.images.length > 1) {
         if (state.currentIndex == 0) {
           // go to the end of array because the current is the start of array
           setState("currentIndex", state.images.length - 1);
