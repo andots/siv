@@ -16,11 +16,13 @@ await initApp();
 const App: Component = () => {
   const { appState } = useAppState();
 
-  // ! Make window close eventlistener
+  // Make eventlistener for close and tile window
   onMount(() => {
     makeEventListener(window, "keydown", (e) => {
       if (e.key === "w" && (e.ctrlKey || e.metaKey)) {
         invokes.closeWindow();
+      } else if (e.key === "t" && (e.ctrlKey || e.metaKey)) {
+        invokes.tileWindows();
       }
     });
   });

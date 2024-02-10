@@ -48,3 +48,7 @@ export const getAppName = async () => {
 export const isMainWindow = () => {
   return appWindow.label === "main";
 };
+
+export const tileWindows = () => {
+  //
+};

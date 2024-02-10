@@ -48,11 +48,6 @@ export const initApp = async () => {
     invokes.createNewWindow();
   }).catch(logError);
 
-  // Control + T - Tile windows
-  await register("CommandOrControl+T", () => {
-    // TODO
-  }).catch(logError);
-
   // Set default title
   await appState.actions.setDefaultTitle().catch(logError);
 
