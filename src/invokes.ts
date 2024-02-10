@@ -1,4 +1,5 @@
 import { invoke } from "@tauri-apps/api";
+import { appWindow } from "@tauri-apps/api/window";
 import { ulid } from "ulidx";
 
 import { logError } from "~/lib/utils";
@@ -17,4 +18,8 @@ export const getImagesInDir = async (path: string) => {
 
 export const createNewWindow = () => {
   createWindow(`w-${ulid()}`, "index.html").catch(logError);
+};
+
+export const closeWindow = () => {
+  appWindow.close().catch(logError);
 };

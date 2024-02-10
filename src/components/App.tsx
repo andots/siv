@@ -8,6 +8,7 @@ import DropArea from "~/components/DropArea";
 import TitleBar from "~/components/TitleBar";
 import Viewer from "~/components/Viewer";
 import { initApp } from "~/init";
+import * as invokes from "~/invokes";
 import { isEmpty, isNotEmpty, logError } from "~/lib/utils";
 import { useAppState } from "~/store";
 
@@ -20,7 +21,7 @@ const App: Component = () => {
   onMount(() => {
     makeEventListener(window, "keydown", (e) => {
       if (e.key === "w" && (e.ctrlKey || e.metaKey)) {
-        appWindow.close().catch(logError);
+        invokes.closeWindow();
       }
     });
   });

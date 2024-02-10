@@ -47,7 +47,7 @@ const TitleBar: Component = () => {
   };
 
   const close = () => {
-    appWindow.close().catch(logError);
+    invokes.closeWindow();
   };
 
   const next = () => {
