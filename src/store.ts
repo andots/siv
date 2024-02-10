@@ -126,6 +126,13 @@ const updaterState = createFluxStore(initUpdaterState(), {
     setShouldUpdate: (value: boolean) => {
       setState("shouldUpdate", value);
     },
+    setCurrentVersion: async () => {
+      const version = await invokes.getAppVersion();
+      setState("currentVersion", version);
+    },
+    setNewVersion: (version: string) => {
+      setState("newVersion", version);
+    },
   }),
 });
 

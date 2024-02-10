@@ -22,14 +22,17 @@ export const initApp = async () => {
 
   // Updater
   if (invokes.isMainWindow()) {
-    await checkUpdate().then((e) => {
-      if (e.shouldUpdate) {
-        console.log("should update");
-      } else {
-        console.log("no update");
-        updaterState.actions.setShouldUpdate(false);
-      }
-    });
+    const result = await checkUpdate();
+    const { shouldUpdate, manifest } = result;
+    if (manifest) {
+      await updaterState.actions.setCurrentVersion();
+      updaterState.actions.setNewVersion(manifest.version);
+    }
+    if (shouldUpdate) {
+      updaterState.actions.setShouldUpdate(true);
+    } else {
+      updaterState.actions.setShouldUpdate(false);
+    }
   }
 
   logDebug("Register Global shortcuts");

@@ -1,0 +1,19 @@
+{
+  "version": "0.12.3",
+  "notes": "### :bug: Bug Fixes\n- [`a969b11`](https://github.com/andots/siv/commit/a969b118a1c91bcd49fb8599be0acc56c7d87202) - check array length > 1 to go next and prev *(commit by @andots)*\n- [`b51b1a0`](https://github.com/andots/siv/commit/b51b1a07cbfeddbd3008d8e9b373a931db69083f) - remove content_first(true) to get images in dir correctly, also filter by entry is_file *(commit by @andots)*\n\n### :wrench: Chores\n- [`565ff98`](https://github.com/andots/siv/commit/565ff988a9d0b3875d327dbe7c5bd0178f357125) - release v0.11.1 *(commit by @andots)*",
+  "pub_date": "2024-02-10T05:21:02.024Z",
+  "platforms": {
+    "linux-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRdFBrWDFqWHp6UGdlRldQbG4zMjB0aUh4NUZacmRqL2x3emVvbXZlZmFrZzQrZzBtc3FtWCtacEgwNlVtVEpOSG9NaVFoWFFqUUhKVEUzQ2JHWndXU3Y4Mmd3K1hYbWdNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzA3NTQyMjc0CWZpbGU6c2l2XzAuMTEuMV9hbWQ2NC5BcHBJbWFnZS50YXIuZ3oKb1M1TDArQUNmQ2JXUWtlZVo4dDQrZ3NDSkxKTGV3bVZKVFpzeFJsUS9Nb1lpb25wOXE3ZjFMSFVoVjFqKzZKV2cxL3hjaHd4MGs4WmtkUVdRS2tZQVE9PQo=",
+      "url": "https://github.com/andots/siv/releases/download/v0.11.1/siv_0.11.1_amd64.AppImage.tar.gz"
+    },
+    "darwin-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRdFBrWDFqWHp6UG43MGtBUkVQSHRZN1pTZ0JvMVJ5V0xlNFFyVkJVUjk0TzJVTlVLOHdlekczTWNIR1FzT3MyTjA3cFlxbFJvcGN2eEJXUU54M3k3MFUxQ0FZMFNZaGdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzA3NTQyMjk2CWZpbGU6c2l2LmFwcC50YXIuZ3oKVjhoYTV1d3FPU0pRQmxJR2Jma2tXQ2FGQ3dtWUs0TW1LMlI2T3d6TnMzODdzMm4yWWNDSDQ1SnlXaFY4RlF6aUN6emdxUGtxQlVvOE0zMllZMUtnQlE9PQo=",
+      "url": "https://github.com/andots/siv/releases/download/v0.11.1/siv_x64.app.tar.gz"
+    },
+    "windows-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRdFBrWDFqWHp6UGlmV3B5MitwNFl0RXZBZHZlMVBIcHVEb0szTU92MWdyUURYd2lVNjA3M3VLRW9sWlRyNTRlM0IyeDVQNGJDcFdCNkpsZk5RbUFkdURwWEh3bUd5UGdZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzA3NTQyNDU3CWZpbGU6c2l2XzAuMTEuMV94NjRfZW4tVVMubXNpLnppcAo2WjZabk00YkZ3QWxsNGtDRGVVbklja2xlMWpRRHM0aXdMRmFnUFo0RlRoSFhyVkd5dVR3dngxLzBRYlQweDBmbnJqOW45V0d1eWo3WFplQ2pRZGpDZz09Cg==",
+      "url": "https://github.com/andots/siv/releases/download/v0.11.1/siv_0.11.1_x64_en-US.msi.zip"
+    }
+  }
+}

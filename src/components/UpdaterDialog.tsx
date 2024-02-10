@@ -1,5 +1,8 @@
 import { createSignal, type Component, createEffect } from "solid-js";
 
+import { relaunch } from "@tauri-apps/api/process";
+import { installUpdate } from "@tauri-apps/api/updater";
+
 import { Button } from "~/components/ui/button";
 import {
   Dialog,
@@ -9,6 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "~/components/ui/dialog";
+import { logError } from "~/lib/utils";
 import { useUpdaterState } from "~/store";
 
 const UpdaterDialog: Component = () => {
@@ -24,7 +28,7 @@ const UpdaterDialog: Component = () => {
   };
 
   const handleYes = () => {
-    // install update and reloanch
+    installUpdate().then(relaunch).catch(logError);
   };
 
   return (
