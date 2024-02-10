@@ -1,5 +1,19 @@
 # Changelog
 
+# [0.12.0](https://github.com/andots/siv/compare/v0.11.1...v0.12.0) (2024-02-10)
+
+
+### Bug Fixes
+
+* remove close button on dialog.tsx ([f2a05d7](https://github.com/andots/siv/commit/f2a05d71ac75cc1ffc096757faaeb929e1672003))
+
+
+### Features
+
+* control global updater state ([02ec883](https://github.com/andots/siv/commit/02ec883fad1ecc4348fb8813853bd0c528841eb5))
+* get app name and title in invokes ([38aa3c7](https://github.com/andots/siv/commit/38aa3c718061265445a912b59e9a8bb2757d1ff3))
+* updater with custom dialog ([0ea9681](https://github.com/andots/siv/commit/0ea968176dfa95fc61a6e674f3e93cdab9522fef))
+
 ## [0.11.1](https://github.com/andots/siv/compare/v0.11.0...v0.11.1) (2024-02-10)
 
 
