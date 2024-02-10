@@ -98,11 +98,15 @@ export const useAppState = () => {
 */
 type UpdaterState = {
   shouldUpdate: boolean;
+  currentVersion: string;
+  newVersion: string;
 };
 
 const initUpdaterState = (): UpdaterState => {
   return {
     shouldUpdate: false,
+    currentVersion: "0.0.0",
+    newVersion: "0.0.0",
   };
 };
 
@@ -110,6 +114,12 @@ const updaterState = createFluxStore(initUpdaterState(), {
   getters: (state) => ({
     shouldUpdate: () => {
       return state.shouldUpdate;
+    },
+    currentVersion: () => {
+      return state.currentVersion;
+    },
+    newVersion: () => {
+      return state.newVersion;
     },
   }),
   actions: (setState, _state) => ({

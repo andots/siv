@@ -1,4 +1,4 @@
-import type { Component } from "solid-js";
+import { createSignal, type Component, createEffect } from "solid-js";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -13,20 +13,38 @@ import { useUpdaterState } from "~/store";
 
 const UpdaterDialog: Component = () => {
   const { updaterState } = useUpdaterState();
+  const [open, setOpen] = createSignal<boolean>(false);
+
+  createEffect(() => {
+    setOpen(updaterState.getters.shouldUpdate());
+  });
+
+  const handleNo = () => {
+    setOpen(false);
+  };
+
+  const handleYes = () => {
+    // install update and reloanch
+  };
 
   return (
-    <Dialog open={updaterState.getters.shouldUpdate()}>
+    <Dialog open={open()}>
       <DialogContent class="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>New version is now available!</DialogTitle>
-          <DialogDescription>Would you like to install it now?</DialogDescription>
-          <div>
-            <p>Release Note</p>
-          </div>
+          <DialogTitle>
+            New version v{updaterState.getters.newVersion()} is now available!
+          </DialogTitle>
+          <DialogDescription>
+            You have v{updaterState.getters.currentVersion()}. Would you like to update it now?
+          </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button>No</Button>
-          <Button>Yes</Button>
+          <Button variant="outline" onClick={handleNo}>
+            No
+          </Button>
+          <Button variant="default" onClick={handleYes}>
+            Yes
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

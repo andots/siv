@@ -1,7 +1,9 @@
 import { getMatches } from "@tauri-apps/api/cli";
+import { TauriEvent, type Event } from "@tauri-apps/api/event";
 import { register, unregisterAll } from "@tauri-apps/api/globalShortcut";
 import { exit } from "@tauri-apps/api/process";
 import { checkUpdate } from "@tauri-apps/api/updater";
+import { appWindow } from "@tauri-apps/api/window";
 import { attachConsole } from "tauri-plugin-log-api";
 
 import * as invokes from "~/invokes";
@@ -62,4 +64,12 @@ export const initApp = async () => {
       })
       .catch(logError);
   }
+
+  appWindow
+    .listen(TauriEvent.WINDOW_FILE_DROP, (event: Event<TauriEvent.WINDOW_FILE_DROP>) => {
+      if (event.payload.length == 1) {
+        appState.actions.setCurrentFilePath(event.payload[0]).catch(logError);
+      }
+    })
+    .catch(logError);
 };
