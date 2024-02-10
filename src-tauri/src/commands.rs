@@ -34,20 +34,22 @@ pub async fn create_window(
 
 fn is_image(entry: &DirEntry) -> bool {
     let mut flag = false;
-    if let Some(ext) = entry.path().extension() {
-        if ext.eq_ignore_ascii_case("png")
-            || ext.eq_ignore_ascii_case("jpg")
-            || ext.eq_ignore_ascii_case("jpeg")
-            || ext.eq_ignore_ascii_case("webp")
-            || ext.eq_ignore_ascii_case("svg")
-            || ext.eq_ignore_ascii_case("gif")
-            || ext.eq_ignore_ascii_case("avif")
-            || ext.eq_ignore_ascii_case("apng")
-            || ext.eq_ignore_ascii_case("jpe")
-            || ext.eq_ignore_ascii_case("jif")
-            || ext.eq_ignore_ascii_case("jfif")
-        {
-            flag = true;
+    if entry.file_type().is_file() {
+        if let Some(ext) = entry.path().extension() {
+            if ext.eq_ignore_ascii_case("png")
+                || ext.eq_ignore_ascii_case("jpg")
+                || ext.eq_ignore_ascii_case("jpeg")
+                || ext.eq_ignore_ascii_case("webp")
+                || ext.eq_ignore_ascii_case("svg")
+                || ext.eq_ignore_ascii_case("gif")
+                || ext.eq_ignore_ascii_case("avif")
+                || ext.eq_ignore_ascii_case("apng")
+                || ext.eq_ignore_ascii_case("jpe")
+                || ext.eq_ignore_ascii_case("jif")
+                || ext.eq_ignore_ascii_case("jfif")
+            {
+                flag = true;
+            }
         }
     }
     flag
@@ -62,8 +64,11 @@ pub fn get_images_in_dir(path: String) -> Result<Vec<String>, String> {
         } else {
             p
         };
+        // https://docs.rs/walkdir/latest/walkdir/struct.FilterEntry.html#method.filter_entry
+        // If the iterator has contents_first enabled,
+        // then this method is no different than calling the standard Iterator::filter method
+        // (because directory entries are yielded after they’ve been descended into).
         let walker = WalkDir::new(dir)
-            .contents_first(true)
             .sort_by_file_name()
             .min_depth(1)
             .max_depth(1)
