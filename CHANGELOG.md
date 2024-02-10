@@ -1,5 +1,18 @@
 # Changelog
 
+# [0.11.0](https://github.com/andots/siv/compare/v0.10.1...v0.11.0) (2024-02-10)
+
+
+### Bug Fixes
+
+* make eventlistener to close window, it should not be a global shortcut ([5f38d6c](https://github.com/andots/siv/commit/5f38d6cfe48c9436173268a92e93f40e4012ea18))
+* set image height to container size according to original size ([4e4c4e1](https://github.com/andots/siv/commit/4e4c4e1d152fc3f552eaf8439569fcf4a4483af5))
+
+
+### Features
+
+* reset zoom and position by r key ([df18ec4](https://github.com/andots/siv/commit/df18ec4d4d01e7c1691d998886d4152826d9795e))
+
 ## [0.10.1](https://github.com/andots/siv/compare/v0.10.0...v0.10.1) (2024-02-09)
 
 
