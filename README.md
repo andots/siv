@@ -31,6 +31,7 @@ SIV is a simple image viewer made with Tauri and SolidJS.
 | k, ArrowUp (↑)            | Move up image position      |
 | l, ArrowRight (→)         | Move right image position   |
 | h, ArrowLeft (←)          | Move left image position    |
+| r                         | Reset position and zoom     |
 | Control + O               | Open new window             |
 | Control + T               | Tile windows                |
 | Control + W               | Close window                |

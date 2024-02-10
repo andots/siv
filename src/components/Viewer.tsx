@@ -56,7 +56,14 @@ const Viewer: Component<Props> = (props) => {
     } else if (e.key === "ArrowRight" || e.key === "l") {
       // pos go right
       setPosition({ x: position().x + 10, y: position().y });
+    } else if (e.key === "r") {
+      reset();
     }
+  };
+
+  const reset = () => {
+    setScale(1.0);
+    setPosition({ x: 0, y: 0 });
   };
 
   const handleMouseWheel = (e: WheelEvent) => {
@@ -75,8 +82,7 @@ const Viewer: Component<Props> = (props) => {
         imageRef.style.height = `${containerRef.clientHeight}px`;
       }
       // reset scale and position
-      setScale(1.0);
-      setPosition({ x: 0, y: 0 });
+      reset();
     }
   };
 
