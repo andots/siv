@@ -1,5 +1,6 @@
 import { onMount, type Component, Show } from "solid-js";
 
+import { makeEventListener } from "@solid-primitives/event-listener";
 import { TauriEvent, type Event } from "@tauri-apps/api/event";
 import { appWindow } from "@tauri-apps/api/window";
 
@@ -14,6 +15,15 @@ await initApp();
 
 const App: Component = () => {
   const { appState } = useAppState();
+
+  // ! Make window close eventlistener
+  onMount(() => {
+    makeEventListener(window, "keydown", (e) => {
+      if (e.key === "w" && (e.ctrlKey || e.metaKey)) {
+        appWindow.close().catch(logError);
+      }
+    });
+  });
 
   onMount(() => {
     appWindow

@@ -1,7 +1,7 @@
 import { getMatches } from "@tauri-apps/api/cli";
 import { register, unregisterAll } from "@tauri-apps/api/globalShortcut";
 import { exit } from "@tauri-apps/api/process";
-import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
+import { appWindow } from "@tauri-apps/api/window";
 import { attachConsole } from "tauri-plugin-log-api";
 
 import * as invokes from "~/invokes";
@@ -23,15 +23,6 @@ export const initApp = async () => {
   // Control+Q - Terminate process
   await register("CommandOrControl+Q", () => {
     exit(0).catch(logError);
-  }).catch(logError);
-
-  // Control+W - Close window
-  await register("CommandOrControl+W", () => {
-    WebviewWindow.getFocusedWindow()
-      .then((window) => {
-        if (window) window.close().catch(logError);
-      })
-      .catch(logError);
   }).catch(logError);
 
   // Control + O - Open new window
