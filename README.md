@@ -46,6 +46,8 @@ pnpm tauri dev
 pnpm tauri build
 # release
 pnpm release
+# add ui component from solid-ui-component https://solid-ui-components.vercel.app/
+pnpm dlx solidui-cli@latest add
 ```
 
 ## 🔗 Links

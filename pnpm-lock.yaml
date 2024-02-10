@@ -44,6 +44,9 @@ dependencies:
   solid-iconify:
     specifier: ^0.0.4
     version: 0.0.4(solid-js@1.8.12)
+  solid-icons:
+    specifier: ^1.1.0
+    version: 1.1.0(solid-js@1.8.12)
   solid-js:
     specifier: ^1.8.12
     version: 1.8.12
@@ -6881,6 +6884,14 @@ packages:
     resolution: {integrity: sha512-3bQt93g2Gfp5qefE5tBtUV1ap7o3p87EEaBRiqXbuFAUEc+JWiYMK92H7kr4JOemRm4Mop/78JAHIfH2PSyLpQ==}
     peerDependencies:
       solid-js: ^1.6.0
+    dependencies:
+      solid-js: 1.8.12
+    dev: false
+
+  /solid-icons@1.1.0(solid-js@1.8.12):
+    resolution: {integrity: sha512-IesTfr/F1ElVwH2E1110s2RPXH4pujKfSs+koT8rwuTAdleO5s26lNSpqJV7D1+QHooJj18mcOiz2PIKs0ic+A==}
+    peerDependencies:
+      solid-js: '*'
     dependencies:
       solid-js: 1.8.12
     dev: false
