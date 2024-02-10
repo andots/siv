@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.11.1](https://github.com/andots/siv/compare/v0.11.0...v0.11.1) (2024-02-10)
+
+
+### Bug Fixes
+
+* check array length > 1 to go next and prev ([a969b11](https://github.com/andots/siv/commit/a969b118a1c91bcd49fb8599be0acc56c7d87202))
+* remove content_first(true) to get images in dir correctly, also filter by entry is_file ([b51b1a0](https://github.com/andots/siv/commit/b51b1a07cbfeddbd3008d8e9b373a931db69083f))
+
 # [0.11.0](https://github.com/andots/siv/compare/v0.10.1...v0.11.0) (2024-02-10)
 
 
