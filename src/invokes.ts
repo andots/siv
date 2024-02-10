@@ -23,3 +23,15 @@ export const createNewWindow = () => {
 export const closeWindow = () => {
   appWindow.close().catch(logError);
 };
+
+export const minimize = () => {
+  appWindow.minimize().catch(logError);
+};
+
+export const toggleMaximize = () => {
+  appWindow.toggleMaximize().catch(logError);
+};
+
+export const setTitleToAppWindow = (title: string) => {
+  appWindow.setTitle(title).catch(logError);
+};

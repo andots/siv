@@ -1,6 +1,5 @@
 import { createSignal, type Component } from "solid-js";
 
-import { appWindow } from "@tauri-apps/api/window";
 import {
   CodiconChevronLeft,
   CodiconChevronRight,
@@ -14,7 +13,6 @@ import {
 import { Button } from "~/components/ui/button";
 import { TITLEBAR_HEIGHT, TITLEBAR_HEIGHT_PX } from "~/constants";
 import * as invokes from "~/invokes";
-import { logError } from "~/lib/utils";
 import { useAppState } from "~/store";
 
 import type { IconTypes } from "solid-iconify";
@@ -38,12 +36,12 @@ const TitleBar: Component = () => {
   const [maximized, setMaximized] = createSignal<boolean>(false);
 
   const minimize = () => {
-    appWindow.minimize().catch(logError);
+    invokes.minimize();
   };
 
   const toggleMaximize = () => {
     setMaximized(!maximized());
-    appWindow.toggleMaximize().catch(logError);
+    invokes.toggleMaximize();
   };
 
   const close = () => {

@@ -1,5 +1,4 @@
 import { createFluxStore } from "@solid-primitives/flux-store";
-import { appWindow } from "@tauri-apps/api/window";
 
 import * as invokes from "~/invokes";
 import { getDirName, getFileName, logError } from "~/lib/utils";
@@ -40,7 +39,7 @@ const appState = createFluxStore(initAppState(), {
     },
     setTitle: (title: string) => {
       setState("title", title); // set title for TitleBar
-      appWindow.setTitle(title).catch(logError); // set title for tauri window
+      invokes.setTitleToAppWindow(title);
     },
     setDefaultTitle: async () => {
       const title = await invokes.getDefaultAppTitle();
