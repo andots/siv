@@ -44,3 +44,7 @@ export const getAppVersion = async () => {
 export const getAppName = async () => {
   return await getName();
 };
+
+export const isMainWindow = () => {
+  return appWindow.label === "main";
+};

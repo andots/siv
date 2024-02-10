@@ -2,7 +2,6 @@ import { getMatches } from "@tauri-apps/api/cli";
 import { register, unregisterAll } from "@tauri-apps/api/globalShortcut";
 import { exit } from "@tauri-apps/api/process";
 import { checkUpdate } from "@tauri-apps/api/updater";
-import { appWindow } from "@tauri-apps/api/window";
 import { attachConsole } from "tauri-plugin-log-api";
 
 import * as invokes from "~/invokes";
@@ -20,14 +19,16 @@ export const initApp = async () => {
   logInfo("initApp");
 
   // Updater
-  await checkUpdate().then((e) => {
-    if (e.shouldUpdate) {
-      console.log("should update");
-    } else {
-      console.log("no update");
-      updaterState.actions.setShouldUpdate(false);
-    }
-  });
+  if (invokes.isMainWindow()) {
+    await checkUpdate().then((e) => {
+      if (e.shouldUpdate) {
+        console.log("should update");
+      } else {
+        console.log("no update");
+        updaterState.actions.setShouldUpdate(false);
+      }
+    });
+  }
 
   logDebug("Register Global shortcuts");
   await unregisterAll().catch(logError);
@@ -51,7 +52,7 @@ export const initApp = async () => {
   await appState.actions.setDefaultTitle().catch(logError);
 
   // Load image with getMatches if window is main
-  if (appWindow.label === "main") {
+  if (invokes.isMainWindow()) {
     await getMatches()
       .then((matches) => {
         const match = matches.args["file"];
