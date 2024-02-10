@@ -92,3 +92,33 @@ const appState = createFluxStore(initAppState(), {
 export const useAppState = () => {
   return { appState };
 };
+
+/*
+  Global state for updater
+*/
+type UpdaterState = {
+  shouldUpdate: boolean;
+};
+
+const initUpdaterState = (): UpdaterState => {
+  return {
+    shouldUpdate: false,
+  };
+};
+
+const updaterState = createFluxStore(initUpdaterState(), {
+  getters: (state) => ({
+    shouldUpdate: () => {
+      return state.shouldUpdate;
+    },
+  }),
+  actions: (setState, _state) => ({
+    setShouldUpdate: (value: boolean) => {
+      setState("shouldUpdate", value);
+    },
+  }),
+});
+
+export const useUpdaterState = () => {
+  return { updaterState };
+};

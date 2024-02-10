@@ -1,12 +1,13 @@
 import { getMatches } from "@tauri-apps/api/cli";
 import { register, unregisterAll } from "@tauri-apps/api/globalShortcut";
 import { exit } from "@tauri-apps/api/process";
+import { checkUpdate } from "@tauri-apps/api/updater";
 import { appWindow } from "@tauri-apps/api/window";
 import { attachConsole } from "tauri-plugin-log-api";
 
 import * as invokes from "~/invokes";
 import { logDebug, logError, logInfo } from "~/lib/utils";
-import { useAppState } from "~/store";
+import { useAppState, useUpdaterState } from "~/store";
 
 export const initApp = async () => {
   if (import.meta.env.DEV) {
@@ -14,8 +15,19 @@ export const initApp = async () => {
   }
 
   const { appState } = useAppState();
+  const { updaterState } = useUpdaterState();
 
   logInfo("initApp");
+
+  // Updater
+  await checkUpdate().then((e) => {
+    if (e.shouldUpdate) {
+      console.log("should update");
+    } else {
+      console.log("no update");
+      updaterState.actions.setShouldUpdate(false);
+    }
+  });
 
   logDebug("Register Global shortcuts");
   await unregisterAll().catch(logError);

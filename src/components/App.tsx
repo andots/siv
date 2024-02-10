@@ -6,6 +6,7 @@ import { appWindow } from "@tauri-apps/api/window";
 
 import DropArea from "~/components/DropArea";
 import TitleBar from "~/components/TitleBar";
+import UpdaterDialog from "~/components/UpdaterDialog";
 import Viewer from "~/components/Viewer";
 import { initApp } from "~/init";
 import * as invokes from "~/invokes";
@@ -45,6 +46,7 @@ const App: Component = () => {
       <Show when={isEmpty(appState.getters.currentFilePath())}>
         <DropArea />
       </Show>
+      <UpdaterDialog />
     </div>
   );
 };

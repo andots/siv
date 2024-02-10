@@ -131,7 +131,7 @@
     },
     "updater": {
       "active": true,
-      "dialog": true,
+      "dialog": false,
       "endpoints": ["https://github.com/andots/siv/releases/latest/download/latest.json"],
       "windows": {
         "installMode": "passive"
