@@ -1,4 +1,5 @@
 import { invoke } from "@tauri-apps/api";
+import { getName, getVersion } from "@tauri-apps/api/app";
 import { appWindow } from "@tauri-apps/api/window";
 import { ulid } from "ulidx";
 
@@ -34,4 +35,12 @@ export const toggleMaximize = () => {
 
 export const setTitleToAppWindow = (title: string) => {
   appWindow.setTitle(title).catch(logError);
+};
+
+export const getAppVersion = async () => {
+  return await getVersion();
+};
+
+export const getAppName = async () => {
+  return await getName();
 };
