@@ -27,9 +27,9 @@ pub async fn create_window(
     config.url = tauri::WindowUrl::App(PathBuf::from(path)); // set given path
     let window = tauri::WindowBuilder::from_config(&app, config)
         .build()
-        .expect("Can't open new window!");
+        .map_err(|e| e.to_string())?;
 
-    set_shadow_to_window(&window).unwrap();
+    set_shadow_to_window(&window).map_err(|e| e.to_string())?;
 
     Ok(())
 }
