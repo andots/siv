@@ -9,6 +9,7 @@ import {
   CodiconChromeRestore,
   CodiconEmptyWindow,
 } from "solid-iconify/codicon";
+import { GrommetIconsSplit } from "solid-iconify/grommet-icons";
 
 import { Button } from "~/components/ui/button";
 import { TITLEBAR_HEIGHT, TITLEBAR_HEIGHT_PX } from "~/constants";
@@ -60,16 +61,21 @@ const TitleBar: Component = () => {
     invokes.createNewWindow();
   };
 
+  const tile = () => {
+    invokes.tileWindows();
+  };
+
   return (
     <div
       class="z-50 w-screen select-none fixed top-0 left-0 right-0 bg-secondary-foreground text-primary-foreground"
       style={{ height: TITLEBAR_HEIGHT_PX }}
     >
       <div class="flex justify-between items-center">
-        <div class="w-[100px]">
+        <div class="w-[130px]">
           <TitleBarButton icon={CodiconChevronLeft} onClick={() => prev()} />
           <TitleBarButton icon={CodiconChevronRight} onClick={() => next()} />
           <TitleBarButton icon={CodiconEmptyWindow} onClick={() => createWindow()} />
+          <TitleBarButton icon={GrommetIconsSplit} onClick={() => tile()} />
         </div>
         <div
           data-tauri-drag-region
@@ -78,12 +84,12 @@ const TitleBar: Component = () => {
         >
           <p
             data-tauri-drag-region
-            class="text-primary-foreground text-xs w-[calc(100vw-240px)] text-center overflow-hidden text-ellipsis text-nowrap"
+            class="text-primary-foreground text-xs w-[calc(100vw-260px)] text-center overflow-hidden text-ellipsis text-nowrap"
           >
             {appState.getters.title()}
           </p>
         </div>
-        <div class="w-[100px] flex justify-end">
+        <div class="w-[130px] flex justify-end">
           <TitleBarButton icon={CodiconChromeMinimize} onClick={() => minimize()} />
           <TitleBarButton
             icon={maximized() ? CodiconChromeRestore : CodiconChromeMaximize}
