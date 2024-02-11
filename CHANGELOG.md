@@ -1,5 +1,17 @@
 # Changelog
 
+# [1.0.0](https://github.com/andots/siv/compare/v0.13.0...v1.0.0) (2024-02-11)
+
+
+### Bug Fixes
+
+* button disabled then close dialog on UpdaterDialog ([40332ce](https://github.com/andots/siv/commit/40332ce61d2c7edb04bccfe1aa2b1913049ed2fe))
+
+
+### Features
+
+* add tile action button on titlebar ([ae69ada](https://github.com/andots/siv/commit/ae69ada92af4ce145fea5ce08bdb5bec2fd9295c))
+
 # [0.13.0](https://github.com/andots/siv/compare/v0.12.0...v0.13.0) (2024-02-11)
 
 
