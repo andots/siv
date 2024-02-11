@@ -1,7 +1,7 @@
 use std::path::{Path, PathBuf};
 
 use log::debug;
-use tauri::Manager;
+use tauri::{Manager, PhysicalPosition, PhysicalSize};
 use walkdir::{DirEntry, WalkDir};
 
 use crate::utils::set_shadow_to_window;
@@ -97,13 +97,28 @@ pub fn tile_windows(app: tauri::AppHandle, label: String) -> Result<(), String> 
         .current_monitor()
         .map_err(|err| err.to_string())?;
     if let Some(monitor) = monitor {
-        debug!("{:?}", monitor);
+        let monitor_width = monitor.size().width;
+        let monitor_height = monitor.size().height;
         let windows = app.windows();
-        debug!("{:?}", windows.keys());
-        if windows.len() == 1 {
+        let window_count = windows.len();
+        if window_count == 1 {
             invoked_window.maximize().map_err(|e| e.to_string())?;
+        } else if window_count >= 2 {
+            for (i, window) in windows.values().enumerate() {
+                // let windows_taskbar_size = 30;
+                let size = PhysicalSize {
+                    width: monitor_width / window_count as u32,
+                    height: monitor_height,
+                };
+                let pos = PhysicalPosition {
+                    x: size.width * i as u32,
+                    y: 0,
+                };
+                // debug!("size: {:?}, pos: {:?}", size, pos);
+                window.set_size(size).map_err(|e| e.to_string())?;
+                window.set_position(pos).map_err(|e| e.to_string())?;
+            }
         }
-        // debug!("{:?}", windows.values());
     } else {
         return Err(String::from("No monitor found."));
     }
