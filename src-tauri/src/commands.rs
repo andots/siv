@@ -89,48 +89,55 @@ pub fn get_images_in_dir(path: String) -> Result<Vec<String>, String> {
 #[tauri::command]
 pub fn tile_windows(app: tauri::AppHandle, label: String) -> Result<(), String> {
     debug!("tile_windows: invoked {}", &label);
-    if let Some(invoked_window) = app.get_window(&label) {
-        if let Ok(Some(monitor)) = invoked_window.current_monitor() {
-            if let Some(monitor_name) = monitor.name() {
-                let mut filtered_windows: Vec<Window> = vec![];
-                for (_label, window) in app.windows() {
-                    if let Ok(Some(current)) = window.current_monitor() {
-                        if let Some(name) = current.name() {
-                            if name == monitor_name {
-                                filtered_windows.push(window)
-                            }
-                        }
-                    }
-                }
+    let invoked_window = match app.get_window(&label) {
+        Some(v) => v,
+        None => return Err(String::from("Window not found")),
+    };
+    let target_monitor = match invoked_window.current_monitor() {
+        Ok(v) => match v {
+            Some(v) => v,
+            None => return Err(String::from("No monitor")),
+        },
+        Err(e) => return Err(e.to_string()),
+    };
+    let target_monitor_name = match target_monitor.name() {
+        Some(v) => v,
+        None => return Err(String::from("Monitor name not found")),
+    };
 
-                let window_count = filtered_windows.len();
-                let monitor_width = monitor.size().width;
-                let monitor_height = monitor.size().height;
-                if window_count == 1 {
-                    invoked_window.maximize().map_err(|e| e.to_string())?;
-                } else if window_count >= 2 {
-                    for (i, window) in filtered_windows.iter().enumerate() {
-                        // let windows_taskbar_size = 30;
-                        let size = PhysicalSize {
-                            width: monitor_width / window_count as u32,
-                            height: monitor_height,
-                        };
-                        let pos = PhysicalPosition {
-                            x: size.width * i as u32,
-                            y: 0,
-                        };
-                        // debug!("size: {:?}, pos: {:?}", size, pos);
-                        window.set_size(size).map_err(|e| e.to_string())?;
-                        window.set_position(pos).map_err(|e| e.to_string())?;
-                    }
+    let mut filtered_windows: Vec<Window> = vec![];
+    for (_label, window) in app.windows() {
+        if let Ok(Some(monitor)) = window.current_monitor() {
+            if let Some(monitor_name) = monitor.name() {
+                if monitor_name == target_monitor_name {
+                    filtered_windows.push(window)
                 }
             }
-        } else {
-            return Err(String::from("No monitor found."));
         }
-    } else {
-        return Err(String::from("No window found."));
     }
+
+    let window_count = filtered_windows.len();
+    let monitor_width = target_monitor.size().width;
+    let monitor_height = target_monitor.size().height;
+    if window_count == 1 {
+        invoked_window.maximize().map_err(|e| e.to_string())?;
+    } else if window_count >= 2 {
+        for (i, window) in filtered_windows.iter().enumerate() {
+            // let windows_taskbar_size = 30;
+            let size = PhysicalSize {
+                width: monitor_width / window_count as u32,
+                height: monitor_height,
+            };
+            let pos = PhysicalPosition {
+                x: size.width * i as u32,
+                y: 0,
+            };
+            // debug!("size: {:?}, pos: {:?}", size, pos);
+            window.set_size(size).map_err(|e| e.to_string())?;
+            window.set_position(pos).map_err(|e| e.to_string())?;
+        }
+    }
+
     Ok(())
 }
 
