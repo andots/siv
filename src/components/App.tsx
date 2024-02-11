@@ -8,7 +8,7 @@ import UpdaterDialog from "~/components/UpdaterDialog";
 import Viewer from "~/components/Viewer";
 import { initApp } from "~/init";
 import * as invokes from "~/invokes";
-import { isEmpty, isNotEmpty } from "~/lib/utils";
+import { isEmpty, isNotEmpty, logError } from "~/lib/utils";
 import { useAppState } from "~/store";
 
 await initApp();
@@ -22,7 +22,7 @@ const App: Component = () => {
       if (e.key === "w" && (e.ctrlKey || e.metaKey)) {
         invokes.closeWindow();
       } else if (e.key === "t" && (e.ctrlKey || e.metaKey)) {
-        invokes.tileWindows();
+        invokes.tileWindows().catch(logError);
       }
     });
   });

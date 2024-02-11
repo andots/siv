@@ -1,5 +1,7 @@
 use std::path::{Path, PathBuf};
 
+use log::debug;
+use tauri::Manager;
 use walkdir::{DirEntry, WalkDir};
 
 use crate::utils::set_shadow_to_window;
@@ -82,6 +84,30 @@ pub fn get_images_in_dir(path: String) -> Result<Vec<String>, String> {
     } else {
         Err(String::from("path is not exists."))
     }
+}
+
+#[tauri::command]
+pub fn tile_windows(app: tauri::AppHandle) -> Result<(), String> {
+    debug!("tile_windows: invoked");
+    let focused_window = match app.get_focused_window() {
+        Some(v) => v,
+        None => return Err(String::from("No focused window")),
+    };
+    let monitor = focused_window
+        .current_monitor()
+        .map_err(|err| err.to_string())?;
+    if let Some(monitor) = monitor {
+        debug!("{:?}", monitor);
+        let windows = app.windows();
+        debug!("{:?}", windows.keys());
+        if windows.len() == 1 {
+            focused_window.maximize().map_err(|e| e.to_string())?;
+        }
+        // debug!("{:?}", windows.values());
+    } else {
+        return Err(String::from("No monitor found."));
+    }
+    Ok(())
 }
 
 #[cfg(test)]
