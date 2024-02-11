@@ -1,22 +1,22 @@
-# SIV - Simple Image Viewer
+# siv - Simple Image Viewer
 
-SIV is a simple image viewer made with Tauri and SolidJS.
+siv is a simple image viewer made with Tauri and SolidJS.
 
 ![demo](docs/demo.jpg)
 
 ## 🚀 Features
 
-- [x] Minimalistic UI - Image and only small control bar on top.
+- [x] Minimalistic UI - Image and small control bar.
 - [x] Multiple windows.
+- [x] Tile windows.
 - [x] Open from OS file explorer/finder.
 - [x] Open from shell command (e.g. siv.exe /path/to/file.png).
-- [x] Open with Drop & Drop image on window.
+- [x] Open with Drop & Drop image on app.
 - [x] Zoom in/out with mouse wheel.
-- [x] Move position of image by dragging in window.
+- [x] Move image position by mouse dragging.
 - [x] Traversing images in folder.
 - [x] Supports file formats: `png`, `jpg`, `jpeg`, `webp`, `svg`, `gif`, `avif`, `jpe`, `jif`, `jfif`
 - [x] Keyboard shortcuts.
-- [x] Tile windows.
 - [ ] Open with file dialog.
 
 ## ⌨️ Shortcuts
@@ -52,6 +52,18 @@ pnpm dlx solidui-cli@latest add
 
 ## 🔗 Links
 
-App Icon: [gonum (glyph)](https://www.iconfinder.com/icons/9075826/photo_gallery_frame_picture_image_wall_icon)
-Icons: [icons grommet](https://icons.grommet.io/)
-UI Components: [solid-ui](https://solid-ui-components.vercel.app/)
+SIV is developed using the following great libraries.
+
+| Use                | Links                                                                                                 |
+| ------------------ | ----------------------------------------------------------------------------------------------------- |
+| App Framework      | [Tauri Apps](https://tauri.app/)                                                                      |
+| Frontend Framework | [solidjs](https://www.solidjs.com/)                                                                   |
+| Frontend Framework | [Astro](https://astro.build/)                                                                         |
+| UI Components      | [solid-ui-components](https://solid-ui-components.vercel.app/)                                        |
+| CSS                | [Tailwind CSS](https://tailwindcss.com/)                                                              |
+| App Icon           | [gonum (glyph)](https://www.iconfinder.com/icons/9075826/photo_gallery_frame_picture_image_wall_icon) |
+| Icons              | [icons grommet](https://icons.grommet.io/)                                                            |
+| Icons              | [xhofe/solid-iconify](https://github.com/xhofe/solid-iconify)                                         |
+| Dragging           | [@neodrag/solid](https://www.neodrag.dev/docs/solid/)                                                 |
+| Event Management   | [Event Listener / Solid Primitives](https://primitives.solidjs.community/package/event-listener)      |
+| State Management   | [Flux Store / Solid Primitives](https://primitives.solidjs.community/package/flux-store)              |
