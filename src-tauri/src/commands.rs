@@ -128,9 +128,7 @@ pub fn tile_windows(app: tauri::AppHandle, label: String) -> Result<(), String> 
     let monitor_width = target_monitor.size().width as i32;
     let monitor_height = target_monitor.size().height as i32;
     let monitor_pos = target_monitor.position();
-    if window_count == 1 {
-        invoked_window.maximize().map_err(|e| e.to_string())?;
-    } else if window_count >= 2 {
+    if window_count >= 2 {
         for (i, window) in filtered_windows.iter().enumerate() {
             // let windows_taskbar_size = 30;
             let size = PhysicalSize {
