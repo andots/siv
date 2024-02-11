@@ -18,16 +18,20 @@ import { useUpdaterState } from "~/store";
 const UpdaterDialog: Component = () => {
   const { updaterState } = useUpdaterState();
   const [open, setOpen] = createSignal<boolean>(false);
+  const [disabled, setDisabled] = createSignal<boolean>(false);
 
   createEffect(() => {
     setOpen(updaterState.getters.shouldUpdate());
   });
 
   const handleNo = () => {
+    setDisabled(true);
     setOpen(false);
   };
 
   const handleYes = () => {
+    setDisabled(true);
+    setOpen(false);
     installUpdate().then(relaunch).catch(logError);
   };
 
@@ -43,10 +47,16 @@ const UpdaterDialog: Component = () => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button variant="outline" onClick={handleNo}>
+          <Button type="button" variant="outline" onClick={handleNo} disabled={disabled()}>
             No
           </Button>
-          <Button variant="default" onClick={handleYes}>
+          <Button
+            type="button"
+            variant="default"
+            onClick={handleYes}
+            autofocus
+            disabled={disabled()}
+          >
             Yes
           </Button>
         </DialogFooter>
