@@ -17,8 +17,8 @@ export const getImagesInDir = async (path: string) => {
   return await invoke<string[]>("get_images_in_dir", { path });
 };
 
-export const tileWindows = async () => {
-  return await invoke("tile_windows", { label: appWindow.label });
+export const tileWindows = () => {
+  invoke("tile_windows", { label: appWindow.label }).catch(logError);
 };
 
 export const createNewWindow = () => {
