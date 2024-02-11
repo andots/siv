@@ -18,7 +18,7 @@ export const getImagesInDir = async (path: string) => {
 };
 
 export const tileWindows = async () => {
-  return await invoke("tile_windows");
+  return await invoke("tile_windows", { label: appWindow.label });
 };
 
 export const createNewWindow = () => {

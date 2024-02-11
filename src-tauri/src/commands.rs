@@ -87,13 +87,13 @@ pub fn get_images_in_dir(path: String) -> Result<Vec<String>, String> {
 }
 
 #[tauri::command]
-pub fn tile_windows(app: tauri::AppHandle) -> Result<(), String> {
-    debug!("tile_windows: invoked");
-    let focused_window = match app.get_focused_window() {
+pub fn tile_windows(app: tauri::AppHandle, label: String) -> Result<(), String> {
+    debug!("tile_windows: invoked {}", &label);
+    let invoked_window = match app.get_window(&label) {
         Some(v) => v,
         None => return Err(String::from("No focused window")),
     };
-    let monitor = focused_window
+    let monitor = invoked_window
         .current_monitor()
         .map_err(|err| err.to_string())?;
     if let Some(monitor) = monitor {
@@ -101,7 +101,7 @@ pub fn tile_windows(app: tauri::AppHandle) -> Result<(), String> {
         let windows = app.windows();
         debug!("{:?}", windows.keys());
         if windows.len() == 1 {
-            focused_window.maximize().map_err(|e| e.to_string())?;
+            invoked_window.maximize().map_err(|e| e.to_string())?;
         }
         // debug!("{:?}", windows.values());
     } else {
