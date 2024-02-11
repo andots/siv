@@ -1,5 +1,22 @@
 # Changelog
 
+# [0.13.0](https://github.com/andots/siv/compare/v0.12.0...v0.13.0) (2024-02-11)
+
+
+### Bug Fixes
+
+* filter windows on the same monitor ([9e6051f](https://github.com/andots/siv/commit/9e6051f52286bf63a5edfa62f45bb2e2e6191200))
+* tile windows only if window_count larger than 2 ([713c3a1](https://github.com/andots/siv/commit/713c3a1d943b361633f5d6725000d59c5009974c))
+* use get_window not get_focused_window ([19068a9](https://github.com/andots/siv/commit/19068a991bbd3cc165206caa1b5801bb1b3a7d51))
+* use map_err for create_window ([4e1e5fd](https://github.com/andots/siv/commit/4e1e5fd56d53b716fc9b3b11a871bd27f6613c63))
+
+
+### Features
+
+* maximize window when one window opened with Control+T ([ed87eb7](https://github.com/andots/siv/commit/ed87eb7f31f9e35c28555e93fdbaf6a116e9612e))
+* tile vertical all windows with Control+T ([fd77984](https://github.com/andots/siv/commit/fd7798460e61b22c319c1a25b14fb854e0743cfb))
+* tile window to the target monitor ([aa7ca48](https://github.com/andots/siv/commit/aa7ca48e35dbf01b8a2b548e68d5e3bb310474dc))
+
 # [0.12.0](https://github.com/andots/siv/compare/v0.11.1...v0.12.0) (2024-02-10)
 
 
