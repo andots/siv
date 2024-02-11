@@ -88,11 +88,15 @@ pub fn get_images_in_dir(path: String) -> Result<Vec<String>, String> {
 
 #[tauri::command]
 pub fn tile_windows(app: tauri::AppHandle, label: String) -> Result<(), String> {
-    debug!("tile_windows: invoked {}", &label);
     let invoked_window = match app.get_window(&label) {
         Some(v) => v,
         None => return Err(String::from("Window not found")),
     };
+
+    // target_monitor value is like below
+    // Monitor { name: Some("\\\\.\\DISPLAY2"),
+    // size: PhysicalSize { width: 1920, height: 1080 },
+    // position: PhysicalPosition { x: -1920, y: 360 }, scale_factor: 1.0 }
     let target_monitor = match invoked_window.current_monitor() {
         Ok(v) => match v {
             Some(v) => v,
@@ -100,6 +104,7 @@ pub fn tile_windows(app: tauri::AppHandle, label: String) -> Result<(), String> 
         },
         Err(e) => return Err(e.to_string()),
     };
+
     let target_monitor_name = match target_monitor.name() {
         Some(v) => v,
         None => return Err(String::from("Monitor name not found")),
@@ -116,23 +121,26 @@ pub fn tile_windows(app: tauri::AppHandle, label: String) -> Result<(), String> 
         }
     }
 
-    let window_count = filtered_windows.len();
-    let monitor_width = target_monitor.size().width;
-    let monitor_height = target_monitor.size().height;
+    debug!("tile_windows: invoked from {}", &label);
+    debug!("target_monitor = {:?}", target_monitor);
+
+    let window_count = filtered_windows.len() as i32;
+    let monitor_width = target_monitor.size().width as i32;
+    let monitor_height = target_monitor.size().height as i32;
+    let monitor_pos = target_monitor.position();
     if window_count == 1 {
         invoked_window.maximize().map_err(|e| e.to_string())?;
     } else if window_count >= 2 {
         for (i, window) in filtered_windows.iter().enumerate() {
             // let windows_taskbar_size = 30;
             let size = PhysicalSize {
-                width: monitor_width / window_count as u32,
+                width: monitor_width / window_count,
                 height: monitor_height,
             };
-            let pos = PhysicalPosition {
-                x: size.width * i as u32,
-                y: 0,
+            let pos: PhysicalPosition<i32> = PhysicalPosition {
+                x: monitor_pos.x + size.width * i as i32,
+                y: monitor_pos.y,
             };
-            // debug!("size: {:?}, pos: {:?}", size, pos);
             window.set_size(size).map_err(|e| e.to_string())?;
             window.set_position(pos).map_err(|e| e.to_string())?;
         }
