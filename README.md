@@ -52,5 +52,6 @@ pnpm dlx solidui-cli@latest add
 
 ## 🔗 Links
 
-App Icon: <https://www.iconfinder.com/icons/9075826/photo_gallery_frame_picture_image_wall_icon>
-Icons: <https://icons.grommet.io/>
+App Icon: [gonum (glyph)](https://www.iconfinder.com/icons/9075826/photo_gallery_frame_picture_image_wall_icon)
+Icons: [icons grommet](https://icons.grommet.io/)
+UI Components: [solid-ui](https://solid-ui-components.vercel.app/)
