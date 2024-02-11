@@ -1,15 +1,32 @@
 import { createSignal, type Component } from "solid-js";
 
+// import {
+//   CodiconChevronLeft,
+//   CodiconChevronRight,
+//   CodiconChromeClose,
+//   CodiconChromeMaximize,
+//   CodiconChromeMinimize,
+//   CodiconChromeRestore,
+//   CodiconEmptyWindow,
+// } from "solid-iconify/codicon";
 import {
-  CodiconChevronLeft,
-  CodiconChevronRight,
-  CodiconChromeClose,
-  CodiconChromeMaximize,
-  CodiconChromeMinimize,
-  CodiconChromeRestore,
-  CodiconEmptyWindow,
-} from "solid-iconify/codicon";
-import { GrommetIconsSplit } from "solid-iconify/grommet-icons";
+  GrommetIconsSplit,
+  GrommetIconsClose,
+  // GrommetIconsNewWindow,
+  GrommetIconsAdd,
+  // GrommetIconsNext,
+  // GrommetIconsPrevious,
+  // GrommetIconsClone,
+  GrommetIconsLinkPrevious,
+  GrommetIconsLinkNext,
+  // GrommetIconsMultiple,
+  GrommetIconsSubtract,
+  GrommetIconsCheckbox,
+  // GrommetIconsStatusPlaceholder,
+  // GrommetIconsAddCircle,
+  // GrommetIconsChapterAdd,
+  // GrommetIconsFormAdd,
+} from "solid-iconify/grommet-icons";
 
 import { Button } from "~/components/ui/button";
 import { TITLEBAR_HEIGHT, TITLEBAR_HEIGHT_PX } from "~/constants";
@@ -27,7 +44,7 @@ const TitleBarButton: Component<Props> = (props) => {
       style={{ height: TITLEBAR_HEIGHT_PX, width: TITLEBAR_HEIGHT_PX }}
       onClick={props.onClick}
     >
-      <props.icon />
+      <props.icon size={15} />
     </Button>
   );
 };
@@ -72,9 +89,9 @@ const TitleBar: Component = () => {
     >
       <div class="flex justify-between items-center">
         <div class="w-[130px]">
-          <TitleBarButton icon={CodiconChevronLeft} onClick={() => prev()} />
-          <TitleBarButton icon={CodiconChevronRight} onClick={() => next()} />
-          <TitleBarButton icon={CodiconEmptyWindow} onClick={() => createWindow()} />
+          <TitleBarButton icon={GrommetIconsLinkPrevious} onClick={() => prev()} />
+          <TitleBarButton icon={GrommetIconsLinkNext} onClick={() => next()} />
+          <TitleBarButton icon={GrommetIconsAdd} onClick={() => createWindow()} />
           <TitleBarButton icon={GrommetIconsSplit} onClick={() => tile()} />
         </div>
         <div
@@ -90,12 +107,12 @@ const TitleBar: Component = () => {
           </p>
         </div>
         <div class="w-[130px] flex justify-end">
-          <TitleBarButton icon={CodiconChromeMinimize} onClick={() => minimize()} />
+          <TitleBarButton icon={GrommetIconsSubtract} onClick={() => minimize()} />
           <TitleBarButton
-            icon={maximized() ? CodiconChromeRestore : CodiconChromeMaximize}
+            icon={maximized() ? GrommetIconsCheckbox : GrommetIconsCheckbox}
             onClick={() => toggleMaximize()}
           />
-          <TitleBarButton icon={CodiconChromeClose} onClick={() => close()} />
+          <TitleBarButton icon={GrommetIconsClose} onClick={() => close()} />
         </div>
       </div>
     </div>

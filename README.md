@@ -53,3 +53,4 @@ pnpm dlx solidui-cli@latest add
 ## 🔗 Links
 
 App Icon: <https://www.iconfinder.com/icons/9075826/photo_gallery_frame_picture_image_wall_icon>
+Icons: <https://icons.grommet.io/>
