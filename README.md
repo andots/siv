@@ -16,8 +16,8 @@ SIV is a simple image viewer made with Tauri and SolidJS.
 - [x] Traversing images in folder.
 - [x] Supports file formats: `png`, `jpg`, `jpeg`, `webp`, `svg`, `gif`, `avif`, `jpe`, `jif`, `jfif`
 - [x] Keyboard shortcuts.
+- [x] Tile windows.
 - [ ] Open with file dialog.
-- [ ] Tile windows.
 
 ## ⌨️ Shortcuts
 
