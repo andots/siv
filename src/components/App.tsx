@@ -6,15 +6,19 @@ import DropArea from "~/components/DropArea";
 import TitleBar from "~/components/TitleBar";
 import UpdaterDialog from "~/components/UpdaterDialog";
 import Viewer from "~/components/Viewer";
-import { initApp } from "~/init";
+import { initApp, initUpdater } from "~/init";
 import * as invokes from "~/invokes";
-import { isEmpty, isNotEmpty } from "~/lib/utils";
+import { isEmpty, isNotEmpty, logError } from "~/lib/utils";
 import { useAppState } from "~/store";
 
 await initApp();
 
 const App: Component = () => {
   const { appState } = useAppState();
+
+  onMount(() => {
+    initUpdater().catch(logError);
+  });
 
   // Make eventlistener for close and tile window
   onMount(() => {

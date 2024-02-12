@@ -16,24 +16,8 @@ export const initApp = async () => {
   }
 
   const { appState } = useAppState();
-  const { updaterState } = useUpdaterState();
 
   logInfo("initApp");
-
-  // Updater
-  if (invokes.isMainWindow()) {
-    const result = await checkUpdate();
-    const { shouldUpdate, manifest } = result;
-    if (manifest) {
-      await updaterState.actions.setCurrentVersion();
-      updaterState.actions.setNewVersion(manifest.version);
-    }
-    if (shouldUpdate) {
-      updaterState.actions.setShouldUpdate(true);
-    } else {
-      updaterState.actions.setShouldUpdate(false);
-    }
-  }
 
   logDebug("Register Global shortcuts");
   await unregisterAll().catch(logError);
@@ -70,4 +54,21 @@ export const initApp = async () => {
       }
     })
     .catch(logError);
+};
+
+export const initUpdater = async () => {
+  const { updaterState } = useUpdaterState();
+  if (invokes.isMainWindow()) {
+    const result = await checkUpdate();
+    const { shouldUpdate, manifest } = result;
+    if (manifest) {
+      await updaterState.actions.setCurrentVersion();
+      updaterState.actions.setNewVersion(manifest.version);
+    }
+    if (shouldUpdate) {
+      updaterState.actions.setShouldUpdate(true);
+    } else {
+      updaterState.actions.setShouldUpdate(false);
+    }
+  }
 };
