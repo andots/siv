@@ -1,6 +1,7 @@
 import { onMount, type Component, Show } from "solid-js";
 
 import { makeEventListener } from "@solid-primitives/event-listener";
+import { exit } from "@tauri-apps/api/process";
 
 import DropArea from "~/components/DropArea";
 import TitleBar from "~/components/TitleBar";
@@ -20,13 +21,17 @@ const App: Component = () => {
     initUpdater().catch(logError);
   });
 
-  // Make eventlistener for close and tile window
+  // Make eventlistener for keyboard shortcuts
   onMount(() => {
     makeEventListener(window, "keydown", (e) => {
       if (e.key === "w" && (e.ctrlKey || e.metaKey)) {
         invokes.closeWindow();
       } else if (e.key === "t" && (e.ctrlKey || e.metaKey)) {
         invokes.tileWindows();
+      } else if (e.key === "o" && (e.ctrlKey || e.metaKey)) {
+        invokes.createNewWindow();
+      } else if (e.key === "q" && (e.ctrlKey || e.metaKey)) {
+        exit(0).catch(logError);
       }
     });
   });
