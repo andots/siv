@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/andots/siv/compare/v1.0.0...v1.0.1) (2024-02-12)
+
+
+### Performance Improvements
+
+* do not await updater ([e18e301](https://github.com/andots/siv/commit/e18e30191da130180f43e71b753d172b9bae32f8))
+* don't wait setCurrentDir action ([f2c7083](https://github.com/andots/siv/commit/f2c7083947c1b30d0623dc9c01ac5b39cbb48387))
+
 # [1.0.0](https://github.com/andots/siv/compare/v0.13.0...v1.0.0) (2024-02-11)
 
 
