@@ -49,14 +49,13 @@ const appState = createFluxStore(initAppState(), {
       setState("currentFilePath", path);
       const title = await getFileName(path);
       appState.actions.setTitle(title);
-      await appState.actions.setCurrentDir(path);
+      appState.actions.setCurrentDir(path).catch(logError);
     },
     setCurrentDir: async (path: string) => {
       const dir = await getDirName(path);
       if (state.currentDir !== dir) {
         setState("currentDir", dir);
         const images = await invokes.getImagesInDir(dir);
-        console.log(images);
         setState("images", images);
         const index = images.findIndex((a) => a === path);
         if (index != -1) {
